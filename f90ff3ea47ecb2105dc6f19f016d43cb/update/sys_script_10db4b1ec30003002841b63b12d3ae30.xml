@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>true</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_hub_flow</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Delete Trigger and Plan</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	var remoteTriggerId = current.remote_trigger_id;
+	if (!remoteTriggerId || remoteTriggerId == "") {
+		var triggerInstance = new GlideRecord("sys_hub_trigger_instance");
+		if (!triggerInstance.get("flow", current.sys_id))
+			return;
+		
+		remoteTriggerId = triggerInstance.remote_sys_id;
+	}	
+
+    var planRecord = new GlideRecord("sys_flow_trigger_plan");
+	var planId = "";
+	if (planRecord.get("trigger", remoteTriggerId)) {
+		planId = planRecord.getValue("plan_id");
+		planRecord.deleteRecord();
+	}
+
+    var triggerRecord = new GlideRecord("sys_flow_trigger");
+	if (triggerRecord.get(remoteTriggerId)) {
+		if (triggerRecord.getValue("sys_class_name") == "sys_flow_record_trigger")
+			sn_flow_trigger.FlowTriggerAPI.deleteRecordTrigger(planId);
+		else
+			triggerRecord.deleteRecord();
+	}
+	
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-07-21 16:57:58</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>10db4b1ec30003002841b63b12d3ae30</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>Delete Trigger and Plan</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Flow Designer Designer Model" source="com.glide.hub.designer_backend.model">fff61770d00722105590fd9a5a77e77c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_10db4b1ec30003002841b63b12d3ae30</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:37</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=10db4b1ec30003002841b63b12d3ae30"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbce140000001</claim_timestamp>
+        <metadata_update_name>sys_script_10db4b1ec30003002841b63b12d3ae30</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:37</sys_created_on>
+        <sys_id>2e0f37ea47ecb2105dc6f19f016d43d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:37</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbce130000001</claim_timestamp>
+        <metadata_update_name>sys_script_10db4b1ec30003002841b63b12d3ae30</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.hub.designer_backend.model</previous_claim_name>
+        <previous_claim_scope>com.glide.hub.designer_backend.m</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:37</sys_created_on>
+        <sys_id>ee0f37ea47ecb2105dc6f19f016d43d6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:37</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sysevent_script_action">
+    <sysevent_script_action action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <condition_script/>
+        <description/>
+        <event_name>system.upgraded</event_name>
+        <name>OpenNLUPredictIntentFeedbackUpdates</name>
+        <order>100</order>
+        <script><![CDATA[gs.info("Starting update of the OpenNLUPredictIntentFeedback table to populate the NLU Discovery Outcome field");
+try {
+	var api = new UpdateNLUDiscoveryOutcomes();
+	api.updateNluDiscoveryOutcomes();
+} catch (ex) {
+	gs.info("Error running updateNluDiscoveryOutcomes() : " + ex.toString());
+}
+
+// Set this record to false so that it does not run again
+var gr = new GlideRecord("sysevent_script_action");
+gr.addQuery("sys_id", "d28b5c06eb463010506f7558b552281f"); // Sysid of this record
+gr.query();
+if (gr.next()) {
+	gr.setValue("active", false);
+	gr.update();
+}
+
+gs.info("Completed update of the OpenNLUPredictIntentFeedback table");
+
+]]></script>
+        <synchronous>false</synchronous>
+        <sys_class_name>sysevent_script_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-08-19 16:46:48</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d28b5c06eb463010506f7558b552281f</sys_id>
+        <sys_mod_count>29</sys_mod_count>
+        <sys_name>OpenNLUPredictIntentFeedbackUpdates</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Glide Conversation Server" source="com.glide.cs">ef4d57b0d08722105590fd9a5a77e761</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sysevent_script_action_d28b5c06eb463010506f7558b552281f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:43</sys_updated_on>
+    </sysevent_script_action>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcceee0000001</claim_timestamp>
+        <metadata_update_name>sysevent_script_action_d28b5c06eb463010506f7558b552281f</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:43</sys_created_on>
+        <sys_id>ea4fbf2e47ecb2105dc6f19f016d4365</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:43</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcceed0000001</claim_timestamp>
+        <metadata_update_name>sysevent_script_action_d28b5c06eb463010506f7558b552281f</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.cs</previous_claim_name>
+        <previous_claim_scope>com.glide.cs</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:43</sys_created_on>
+        <sys_id>ae4fbf2e47ecb2105dc6f19f016d4365</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:43</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>cmdb_ci_storage_server</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Display:Storage Server</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	var gr = new GlideRecord('cmdb_rel_ci');
+
+	gr.addQuery('parent', current.sys_id);
+	gr.addQuery('type.name', 'Uses::Used by');
+	gr.addQuery('child.sys_class_name', 'cmdb_ci_storage_server');
+
+	gr.query();
+	if (!gr.next()) {
+		if (typeof g_scratchpad.hideRelatedLists === 'undefined') // expected
+			g_scratchpad.hideRelatedLists = [];
+
+		g_scratchpad.hideRelatedLists.push('REL:d9b3dac78f90120010340b5437bdee47'); 
+	}
+
+})(current, previous);
+]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2015-12-17 18:30:15</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>11f4520b8f90120010340b5437bdee85</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Display:Storage Server</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Configuration Management (CMDB)" source="com.snc.cmdb">f6511770d04322105590fd9a5a77e736</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_11f4520b8f90120010340b5437bdee85</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:56</sys_updated_on>
+        <template/>
+        <when>before_display</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=11f4520b8f90120010340b5437bdee85"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc16230000001</claim_timestamp>
+        <metadata_update_name>sys_script_11f4520b8f90120010340b5437bdee85</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:56</sys_created_on>
+        <sys_id>8b1f3fea47ecb2105dc6f19f016d4314</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:56</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc16220000001</claim_timestamp>
+        <metadata_update_name>sys_script_11f4520b8f90120010340b5437bdee85</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.cmdb</previous_claim_name>
+        <previous_claim_scope>com.snc.cmdb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:56</sys_created_on>
+        <sys_id>4f1f3fea47ecb2105dc6f19f016d4314</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:56</sys_updated_on>
+    </sys_claim>
+</record_update>

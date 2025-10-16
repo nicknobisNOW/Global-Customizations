@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>true</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_choice</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Choices unload - before</name>
+        <order>200</order>
+        <priority/>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[var agg = new GlideAggregate("sys_choice");
+agg.addQuery("name", current.name);
+agg.addQuery("element", current.element);
+agg.addAggregate("COUNT");
+agg.query();
+var count = 0;
+
+//do not add a base version for an empty choice list
+if(agg.next()){
+    count = agg.getAggregate("COUNT");
+    if(count > 0)
+        gs.unloadChoices(current.name, current.element, 'true');
+
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>glide.maint</sys_created_by>
+        <sys_created_on>2007-04-19 18:03:20</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>0b033c0fa9fe3dba00a19277c36e145d</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Choices unload - before</sys_name>
+        <sys_overrides display_value="">global</sys_overrides>
+        <sys_package display_value="System Update Sets (with remote update set support)" source="com.glide.system_update_set">a280d3b8d00322105590fd9a5a77e780</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_0b033c0fa9fe3dba00a19277c36e145d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:09</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0b033c0fa9fe3dba00a19277c36e145d"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc49890000001</claim_timestamp>
+        <metadata_update_name>sys_script_0b033c0fa9fe3dba00a19277c36e145d</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:09</sys_created_on>
+        <sys_id>062f732e47ecb2105dc6f19f016d4376</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:09</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc49880000001</claim_timestamp>
+        <metadata_update_name>sys_script_0b033c0fa9fe3dba00a19277c36e145d</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.system_update_set</previous_claim_name>
+        <previous_claim_scope>com.glide.system_update_set</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:09</sys_created_on>
+        <sys_id>c62f732e47ecb2105dc6f19f016d4376</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:09</sys_updated_on>
+    </sys_claim>
+</record_update>

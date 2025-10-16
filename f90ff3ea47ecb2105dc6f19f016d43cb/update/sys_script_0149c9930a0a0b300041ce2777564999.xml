@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>true</client_callable>
+        <collection>global</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Role Delegation Functions</name>
+        <order>200</order>
+        <priority/>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[/**
+ Service-now.com
+
+ Description: Functions called by role delegation Record Producers and Workflows
+**/ 
+
+function getDelegatableRoles(group) {
+   answer = "";
+
+   if (gs.hasRole("admin")) {  // admin can grant any grantable role in any group
+      var role = new GlideRecord("sys_user_role");
+      role.addQuery("grantable", true);
+      role.addQuery("can_delegate", true);
+      role.query();
+      var i = 0;
+      while (role.next()) {
+         if (i > 0)
+            answer += ",";
+         answer += role.sys_id;
+         i++;
+      }
+   } else {  // non-admin role delegator can delegate roles they have
+      var roles = new GlideRecord("sys_user_has_role");
+      roles.addQuery("user", gs.getUserID());
+      roles.addQuery("role.can_delegate", true);
+      roles.addQuery("role.grantable", true);
+      roles.query();
+      var i = 0;
+      while (roles.next()) {
+         if (i > 0)
+            answer += ",";
+         answer += roles.role;
+         i++;
+      }
+   }
+   return answer;
+}
+
+function getMyRoleDelegationGroups() {
+  // admin can delegate to all groups
+  if (gs.hasRole("admin"))
+    return "";
+
+  // find groups where user has the role_delegator role in that group
+  var hasRoles = new GlideRecord("sys_user_has_role");
+  hasRoles.addQuery("user", gs.getUserID());
+  hasRoles.addQuery("role.name", "role_delegator");
+  hasRoles.query();
+  var al = new Packages.java.util.ArrayList();
+  while (hasRoles.next()) {
+    if (!al.contains(hasRoles.sys_id))
+      al.add(hasRoles.granted_by.sys_id);
+  }
+
+  var answer = "sys_idIN";
+  for (var i = 0; i < al.size(); i++) {
+    if (i > 0)
+      answer += ",";
+    answer += al.get(i);
+  }
+  return answer;
+}
+
+function getRoleDelegatorOptions() {
+  if (current.variables.role_delegator_group == "")
+    return '';
+
+  var userIDs = [];
+  var userGR = new GlideRecord('sys_user_grmember');
+  userGR.addQuery("group", current.variables.role_delegator_group);
+  userGR.query();
+  while (userGR.next())
+    userIDs.push(userGR.user.toString());
+  
+  return 'sys_idIN' + userIDs.join(',');
+}
+
+function getRoleDelegatorGroupOptions() {
+  if (current.variables.role_delegator_user == "")
+    return '';
+
+  var groupIDs = [];
+  var userGR = new GlideRecord('sys_user_grmember');
+  userGR.addQuery("user", current.variables.role_delegator_user);
+  userGR.query();
+  while (userGR.next())
+    groupIDs.push(userGR.group.toString());
+  
+  return 'sys_idIN' + groupIDs.join(',');
+}
+
+function getUsersForRoleDelegation() {
+  if (current.variables.delegate_roles_group == "")
+    return '';
+
+  var userIDs = [];
+  var userGR = new GlideRecord('sys_user_grmember');
+  userGR.addQuery("group", current.variables.delegate_roles_group);
+  if (!gs.hasRole("admin"))
+    userGR.addQuery("user", "!=", gs.getUserID());
+  userGR.query();
+  while (userGR.next())
+    userIDs.push(userGR.user.toString());
+  
+  return 'sys_idIN' + userIDs.join(',');
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>james.capaldo</sys_created_by>
+        <sys_created_on>2010-02-24 18:44:43</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>0149c9930a0a0b300041ce2777564999</sys_id>
+        <sys_mod_count>32</sys_mod_count>
+        <sys_name>Role Delegation Functions</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Role Delegation" source="com.snc.role_delegation">98775334d00722105590fd9a5a77e728</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_0149c9930a0a0b300041ce2777564999</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:44</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0149c9930a0a0b300041ce2777564999"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbe8500000001</claim_timestamp>
+        <metadata_update_name>sys_script_0149c9930a0a0b300041ce2777564999</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:44</sys_created_on>
+        <sys_id>001ff7ea47ecb2105dc6f19f016d4337</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:44</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbe84f0000001</claim_timestamp>
+        <metadata_update_name>sys_script_0149c9930a0a0b300041ce2777564999</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.role_delegation</previous_claim_name>
+        <previous_claim_scope>com.snc.role_delegation</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:44</sys_created_on>
+        <sys_id>c41ff7ea47ecb2105dc6f19f016d4337</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:44</sys_updated_on>
+    </sys_claim>
+</record_update>

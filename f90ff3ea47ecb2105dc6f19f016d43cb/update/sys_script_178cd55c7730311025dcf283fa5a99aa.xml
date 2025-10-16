@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_auth_profile_mapping</collection>
+        <condition> (current.api_access_policy.apply_global) &amp;&amp; ( (current.inbound_auth_profile.sys_class_name.equals("http_key_auth")) || (current.inbound_auth_profile.sys_class_name.equals("http_hmac_auth"))) </condition>
+        <description>Token Based Auth is not allowed in Global REST API Policy</description>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Check Token Based Auth for Global API</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[gs.addErrorMessage(gs.getMessage("Token Based Auth is not allowed in Global REST API Policy "));
+current.setAbortAction(true);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-08-17 16:35:06</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>178cd55c7730311025dcf283fa5a99aa</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>Check Token Based Auth for Global API</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="REST API Access Policy Plugin" source="com.glide.rest.policy">2b089ff4d00722105590fd9a5a77e7d3</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_178cd55c7730311025dcf283fa5a99aa</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:17</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=178cd55c7730311025dcf283fa5a99aa"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc6a7a0000002</claim_timestamp>
+        <metadata_update_name>sys_script_178cd55c7730311025dcf283fa5a99aa</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:17</sys_created_on>
+        <sys_id>503f372e47ecb2105dc6f19f016d4369</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:17</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc6a7a0000001</claim_timestamp>
+        <metadata_update_name>sys_script_178cd55c7730311025dcf283fa5a99aa</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.rest.policy</previous_claim_name>
+        <previous_claim_scope>com.glide.rest.policy</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:17</sys_created_on>
+        <sys_id>143f372e47ecb2105dc6f19f016d4369</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:17</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_search_context_config</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Create or Update Suggestion Reader Group</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+    if (current.operation() === "insert") {
+        new SuggestionReaderGroupUtils().createSuggestionReaderGroupsIfNeeded(current.sys_id, current.name);
+    }
+    if (current.operation() === "update") {
+        if (current.search_engine == "ai_search" && previous.search_engine == "zing") {
+            new SuggestionReaderGroupUtils().createSuggestionReaderGroupsIfNeeded(current.sys_id, current.name);
+        }
+        if (current.getValue('name') != previous.getValue('name')) {
+            // Get suggestion reader groups with the old name and update their suggestion_type to the new name
+            var suggestionTypeGR = new GlideRecord('sys_suggestion_reader_group');
+            var condition = suggestionTypeGR.addNullQuery('context_config_id');
+            condition.addOrCondition('context_config_id', current.getValue('sys_id'));
+            suggestionTypeGR.addQuery('suggestion_type', 'ENDSWITH', 'for ' + previous.getValue('name'));
+            suggestionTypeGR.query();
+            while (suggestionTypeGR.next()) {
+                var existingName = suggestionTypeGR.getValue('suggestion_type');
+                var newName = existingName.replaceAll(previous.getValue('name'), current.getValue('name'));
+                suggestionTypeGR.setValue('suggestion_type', newName);
+                gs.info("Updating name of Suggestion Reader Group due to name change of Search Application (from " + existingName + " to " + newName + ")");
+                suggestionTypeGR.update();
+            }
+        }
+    }
+    return;
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-09-18 19:12:17</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>0f2f678e5bd31010d9a5ce1a8581c714</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Create or Update Suggestion Reader Group</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Text search suggestions API" source="com.glide.search.suggestions">7c759778d0c322105590fd9a5a77e7ee</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_0f2f678e5bd31010d9a5ce1a8581c714</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:39</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0f2f678e5bd31010d9a5ce1a8581c714"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbd6250000001</claim_timestamp>
+        <metadata_update_name>sys_script_0f2f678e5bd31010d9a5ce1a8581c714</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:39</sys_created_on>
+        <sys_id>030f77ea47ecb2105dc6f19f016d439a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:39</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbd6240000001</claim_timestamp>
+        <metadata_update_name>sys_script_0f2f678e5bd31010d9a5ce1a8581c714</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.search.suggestions</previous_claim_name>
+        <previous_claim_scope>com.glide.search.suggestions</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:39</sys_created_on>
+        <sys_id>c30f77ea47ecb2105dc6f19f016d439a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:39</sys_updated_on>
+    </sys_claim>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>0f2f678e5bd31010d9a5ce1a8581c714</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-10-11 03:13:38</sys_created_on>
+        <sys_id>9e6caa6f43011210c0f140b805b8f2b7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-11 03:13:38</sys_updated_on>
+        <table>sys_script</table>
+        <use_es_latest>false</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

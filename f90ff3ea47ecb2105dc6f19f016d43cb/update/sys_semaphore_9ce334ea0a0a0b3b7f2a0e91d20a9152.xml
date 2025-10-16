@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_semaphore">
+    <sys_semaphore action="INSERT_OR_UPDATE">
+        <dedicated>false</dedicated>
+        <eligible_to_borrow>true</eligible_to_borrow>
+        <maximum_concurrency>16</maximum_concurrency>
+        <name>Default</name>
+        <order/>
+        <parameters/>
+        <path/>
+        <path_match_operator>EQ</path_match_operator>
+        <session_parameters/>
+        <sys_class_name>sys_semaphore</sys_class_name>
+        <sys_created_by>dloo</sys_created_by>
+        <sys_created_on>2010-03-26 23:51:41</sys_created_on>
+        <sys_id>9ce334ea0a0a0b3b7f2a0e91d20a9152</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Default</sys_name>
+        <sys_package display_value="Semaphore Management" source="com.glide.semaphore">d0afcb70d00322105590fd9a5a77e701</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_semaphore_9ce334ea0a0a0b3b7f2a0e91d20a9152</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:29</sys_updated_on>
+        <type>DEFAULT</type>
+    </sys_semaphore>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc98970000002</claim_timestamp>
+        <metadata_update_name>sys_semaphore_9ce334ea0a0a0b3b7f2a0e91d20a9152</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:29</sys_created_on>
+        <sys_id>873f3b2e47ecb2105dc6f19f016d43ee</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:29</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc98970000001</claim_timestamp>
+        <metadata_update_name>sys_semaphore_9ce334ea0a0a0b3b7f2a0e91d20a9152</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.semaphore</previous_claim_name>
+        <previous_claim_scope>com.glide.semaphore</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:29</sys_created_on>
+        <sys_id>4b3f3b2e47ecb2105dc6f19f016d43ee</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:29</sys_updated_on>
+    </sys_claim>
+</record_update>

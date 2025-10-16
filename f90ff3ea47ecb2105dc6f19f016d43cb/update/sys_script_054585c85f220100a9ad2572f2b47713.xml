@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_dictionary</collection>
+        <condition>current.default_value.changes() || current.dynamic_default_value.changes() || current.use_dynamic_default.changesTo(false)</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Sync default value</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[synchronizeDefaultValue(current);
+
+function synchronizeDefaultValue(gr) {
+	if (gr.default_value.changes()) {
+		processDefaultValue(gr);
+	} else if (gr.dynamic_default_value.changes()) {
+		gr.default_value = getDefaultValue(gr);
+		gr.use_dynamic_default = (gr.default_value == '') ? false : true;
+	} else if (gr.use_dynamic_default.changesTo(false)) {
+		if (!gr.default_value.nil()) {
+			processDefaultValue(gr);
+		} else {
+			gr.default_value = '';
+			gr.dynamic_default_value = '';
+		}
+	}
+}
+
+function processDefaultValue(gr) {
+	gr.dynamic_default_value = getDynamicDefaultValue(gr.default_value.toString(), gr.reference.toString());
+	gr.use_dynamic_default = (gr.dynamic_default_value == '') ? false : true;	
+}
+
+function getDynamicDefaultValue(defaultValue, reference_table) {
+	defaultValue = defaultValue.trim();
+	if (isValidJavascriptCall(defaultValue)) {
+		defaultValue = defaultValue.substring("javascript:".length);
+		if (defaultValue.endsWith(';'))
+			defaultValue = defaultValue.substring(0, defaultValue.length - 1);
+		
+		var dyn = new GlideRecord('sys_filter_option_dynamic');
+		dyn.addQuery('script', defaultValue).addOrCondition('script', defaultValue + ';');
+		
+		if (!reference_table.nil())
+			dyn.addQuery('table', reference_table);		
+
+		dyn.query();
+		if (dyn.next())
+			return dyn.sys_id.toString();
+	}
+	
+	return '';
+}
+
+function isValidJavascriptCall(str) {
+	if (str.indexOf('javascript:') != 0)
+			return false;
+			
+	if (str.substring('javascript:'.length) == '')
+		return false;
+		
+	return true;
+}
+
+function getDefaultValue(gr) {
+	if (gr.dynamic_default_value.script.nil())
+		return '';
+	
+	return 'javascript:' + gr.dynamic_default_value.script;
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>glide.james</sys_created_by>
+        <sys_created_on>2013-07-08 20:27:02</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>054585c85f220100a9ad2572f2b47713</sys_id>
+        <sys_mod_count>48</sys_mod_count>
+        <sys_name>Sync default value</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Dynamic Operands for Dictionary" source="com.glide.dynamic_operands.dict">58501ff4d00322105590fd9a5a77e726</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_054585c85f220100a9ad2572f2b47713</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:44</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=054585c85f220100a9ad2572f2b47713"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcd4130000002</claim_timestamp>
+        <metadata_update_name>sys_script_054585c85f220100a9ad2572f2b47713</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:44</sys_created_on>
+        <sys_id>364fbf2e47ecb2105dc6f19f016d43d5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:44</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcd4130000001</claim_timestamp>
+        <metadata_update_name>sys_script_054585c85f220100a9ad2572f2b47713</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.dynamic_operands.dict</previous_claim_name>
+        <previous_claim_scope>com.glide.dynamic_operands.dict</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:44</sys_created_on>
+        <sys_id>f64fbf2e47ecb2105dc6f19f016d43d5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:44</sys_updated_on>
+    </sys_claim>
+</record_update>

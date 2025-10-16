@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>password_policy</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="password_policy">password_strength!=70^EQ<item display_value="Advanced" endquery="false" field="password_strength" goto="false" newquery="false" operator="!=" or="false" value="70"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>ValidatePwdPolicyForNonAdvancedOption</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+    var minimun_password_length = current.minimun_password_length;
+    var maximum_password_length = current.maximum_password_length;
+    var minimum_uppercase_characters = current.minimum_uppercase_characters;
+    var minimum_lowercase_characters = current.minimum_lowercase_characters;
+    var minimum_numeric_characters = current.minimum_numeric_characters;
+    var minimum_special_characters = current.minimum_special_characters;
+    var whitelisted_special_characters = current.whitelisted_special_characters;
+
+    var policyScript;
+    if (current.isValidField('password_policy_script')) {
+        policyScript = current.password_policy_script;
+    }
+    var options = eval(policyScript);
+    if (options) {
+        if (options['minimun_password_length'] != undefined)
+            minimun_password_length = options['minimun_password_length'];
+        if (options['maximum_password_length'] != undefined)
+            maximum_password_length = options['maximum_password_length'];
+        if (options['minimum_uppercase_characters'] != undefined)
+            minimum_uppercase_characters = options['minimum_uppercase_characters'];
+        if (options['minimum_lowercase_characters'] != undefined)
+            minimum_lowercase_characters = options['minimum_lowercase_characters'];
+        if (options['minimum_numeric_characters'] != undefined)
+            minimum_numeric_characters = options['minimum_numeric_characters'];
+        if (options['minimum_special_characters'] != undefined)
+            minimum_special_characters = options['minimum_special_characters'];
+    }
+
+    // valiidate script options
+    if (minimun_password_length < 8 || minimun_password_length > 100) {
+        gs.addErrorMessage(gs.getMessage("Minimum password length should be in range of: [{0}, {1}]", [8, 100]));
+		current.setAbortAction(true);
+        return;
+    }
+    if (maximum_password_length < 8 || maximum_password_length > 100) {
+        gs.addErrorMessage(gs.getMessage("Maximum password length should be in range of: [{0}, {1}]", [8, 100]));
+		current.setAbortAction(true);
+        return;
+    }
+	
+	if(maximum_password_length - minimun_password_length < 5){
+		gs.addErrorMessage(gs.getMessage("Difference between minimum and maximum password length must be 5 or more", [8, 100]));
+		current.setAbortAction(true);
+        return;
+	}
+	
+    if (minimum_uppercase_characters < 0 || minimum_uppercase_characters > 10) {
+        gs.addErrorMessage(gs.getMessage("Minimum uppercase character(s) should be in range of: [{0}, {1}]", [0, 10]));
+		current.setAbortAction(true);
+        return;
+    }
+    if (minimum_lowercase_characters < 0 || minimum_lowercase_characters > 10) {
+        gs.addErrorMessage(gs.getMessage("Minimum lowercase Character(s) should be in range of: [{0}, {1}]", [0, 10]));
+		current.setAbortAction(true);
+        return;
+    }
+    if (minimum_numeric_characters < 0 || minimum_numeric_characters > 10) {
+        gs.addErrorMessage(gs.getMessage("Minimum numeric character(s) should be in range of: [{0}, {1}]", [0, 10]));
+		current.setAbortAction(true);
+        return;
+    }
+    if (minimum_special_characters < 0 || minimum_special_characters > 10) {
+        gs.addErrorMessage(gs.getMessage("Minimum special character(s) should be in range of: [{0}, {1}]", [0, 10]));
+		current.setAbortAction(true);
+        return;
+    }
+    var tempSum = parseInt(minimum_lowercase_characters) + parseInt(minimum_uppercase_characters) + parseInt(minimum_numeric_characters) + parseInt(minimum_special_characters);
+	var sumStr = String(tempSum);
+	var sum = sumStr.split(".")[0];
+	
+    if (sum > minimun_password_length) {
+        gs.addErrorMessage(gs.getMessage("The minimum password length must not be less than the sum ({0}) of minimum required character fields.", sum));
+		current.setAbortAction(true);
+        return;
+    }
+    if (sum > maximum_password_length) {
+        gs.addErrorMessage(gs.getMessage("The maximum password length must not be less than the sum ({0}) of minimum required character fields.", sum));
+		current.setAbortAction(true);
+        return;
+    }
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-08-23 13:26:07</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>13ec27bfb7533300616ceb67ee11a98a</sys_id>
+        <sys_mod_count>70</sys_mod_count>
+        <sys_name>ValidatePwdPolicyForNonAdvancedOption</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Password Policy" source="com.glide.password_policy">ab31d730d04322105590fd9a5a77e725</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_13ec27bfb7533300616ceb67ee11a98a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:16</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=13ec27bfb7533300616ceb67ee11a98a"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc63bf0000001</claim_timestamp>
+        <metadata_update_name>sys_script_13ec27bfb7533300616ceb67ee11a98a</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:16</sys_created_on>
+        <sys_id>f72ff32e47ecb2105dc6f19f016d43c0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:16</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc63bd0000001</claim_timestamp>
+        <metadata_update_name>sys_script_13ec27bfb7533300616ceb67ee11a98a</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.password_policy</previous_claim_name>
+        <previous_claim_scope>com.glide.password_policy</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:16</sys_created_on>
+        <sys_id>bb2ff32e47ecb2105dc6f19f016d43c0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:16</sys_updated_on>
+    </sys_claim>
+</record_update>

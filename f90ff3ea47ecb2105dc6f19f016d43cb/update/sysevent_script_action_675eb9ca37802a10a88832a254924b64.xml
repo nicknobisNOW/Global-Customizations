@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sysevent_script_action">
+    <sysevent_script_action action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <condition_script/>
+        <description/>
+        <event_name>plugin.upgraded</event_name>
+        <name>Migrate 3DES data</name>
+        <order>100</order>
+        <script><![CDATA[var migrationSuccess = true;
+try {
+    migrateData();
+} catch (e) {
+    migrationSuccess = false;
+}
+
+if (migrationSuccess) {
+    var prop = new GlideRecord("sys_properties");
+    prop.addQuery("name", "glide.sc.masked_migration_success");
+    prop.setWorkflow(false);
+    prop.setUseEngines(false);
+    prop.query();
+    if (prop.next()) {
+        prop.setValue("value", "true");
+        prop.update();
+    }
+}
+
+function migrateData() {
+    var options = new GlideRecord("sc_item_option");
+    options.addEncodedQuery("item_option_new.type=25^valueISNOTEMPTY");
+    options.setWorkflow(false);
+    options.setUseEngines(false);
+    options.query();
+
+    while (options.next()) {
+        updateGr(options, "item_option_new");
+    }
+
+    var quesAns = new GlideRecord("question_answer");
+    quesAns.addEncodedQuery("question.type=25^valueISNOTEMPTY");
+    quesAns.setWorkflow(false);
+    quesAns.setUseEngines(false);
+    quesAns.query();
+
+    while (quesAns.next()) {
+       updateGr(quesAns, "question");
+    }
+
+    //Making the script action inactive 
+
+    var gr = new GlideRecord("sysevent_script_action");
+    gr.get("675eb9ca37802a10a88832a254924b64");
+    gr.active = false;
+    gr.update();
+}
+
+function updateGr(gr, fieldName) {
+    var value = gr.getValue("value");
+    var question = GlideappQuestion.getQuestion(gr.getValue(fieldName));
+    if (question) {
+      var decrptValue = question.decrypt(value);
+      question.setValue(decrptValue); // this will encrypt the value
+      gr.setValue("value", question.getValue()); // populating with the newly encrypted value.
+      gr.update();
+    }
+}]]></script>
+        <synchronous>false</synchronous>
+        <sys_class_name>sysevent_script_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-04 17:52:57</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>675eb9ca37802a10a88832a254924b64</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Migrate 3DES data</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Service Catalog Platform" source="com.glideapp.servicecatalog.platform">6c241b30d0c322105590fd9a5a77e758</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sysevent_script_action_675eb9ca37802a10a88832a254924b64</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:42</sys_updated_on>
+    </sysevent_script_action>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadccacc0000002</claim_timestamp>
+        <metadata_update_name>sysevent_script_action_675eb9ca37802a10a88832a254924b64</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:42</sys_created_on>
+        <sys_id>1e4f7f2e47ecb2105dc6f19f016d43ec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:42</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadccacc0000001</claim_timestamp>
+        <metadata_update_name>sysevent_script_action_675eb9ca37802a10a88832a254924b64</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glideapp.servicecatalog.platform</previous_claim_name>
+        <previous_claim_scope>com.glideapp.servicecatalog.plat</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:42</sys_created_on>
+        <sys_id>de4f7f2e47ecb2105dc6f19f016d43ec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:42</sys_updated_on>
+    </sys_claim>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>675eb9ca37802a10a88832a254924b64</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-03-04 17:52:57</sys_created_on>
+        <sys_id>7e9ad30a370c2a10a88832a254924b7f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-03-04 17:52:57</sys_updated_on>
+        <table>sysevent_script_action</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

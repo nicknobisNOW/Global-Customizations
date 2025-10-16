@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>ecc_agent</collection>
+        <condition/>
+        <description/>
+        <execute_function>true</execute_function>
+        <filter_condition table="ecc_agent">public_keyVALCHANGES^validated!=rekey^EQ<item endquery="false" field="public_key" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
+            <item display_value="Rekey" endquery="false" field="validated" goto="false" newquery="false" operator="!=" or="false" value="rekey"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>MID invalidation</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[function onBefore(current, previous) {
+   //This function will be automatically called when this rule is processed.
+   
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>will.swift</sys_created_by>
+        <sys_created_on>2015-06-19 00:47:04</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>1e0ad6a4373002000e4d03488e41f1ea</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>MID invalidation</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="MID Server" source="com.glideapp.agent">aaa45334d0c322105590fd9a5a77e7f8</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_1e0ad6a4373002000e4d03488e41f1ea</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:19</sys_updated_on>
+        <template>validated=false^EQ</template>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=1e0ad6a4373002000e4d03488e41f1ea"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc73090000002</claim_timestamp>
+        <metadata_update_name>sys_script_1e0ad6a4373002000e4d03488e41f1ea</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:19</sys_created_on>
+        <sys_id>343f772e47ecb2105dc6f19f016d4327</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:19</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc73090000001</claim_timestamp>
+        <metadata_update_name>sys_script_1e0ad6a4373002000e4d03488e41f1ea</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glideapp.agent</previous_claim_name>
+        <previous_claim_scope>com.glideapp.agent</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:19</sys_created_on>
+        <sys_id>f43f772e47ecb2105dc6f19f016d4327</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:19</sys_updated_on>
+    </sys_claim>
+</record_update>

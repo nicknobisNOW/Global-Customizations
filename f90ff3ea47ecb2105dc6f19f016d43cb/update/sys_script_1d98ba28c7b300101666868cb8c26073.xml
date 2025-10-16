@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_graphql_typeresolver</collection>
+        <condition>current.type_name.changes()</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Validate only one resolver per type</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+    var resolverAggregate = new GlideAggregate('sys_graphql_typeresolver');
+    resolverAggregate.addQuery('schema', current.schema);
+    resolverAggregate.addQuery('type_name', current.type_name);
+    resolverAggregate.addQuery('sys_id', '!=', current);
+    resolverAggregate.addAggregate('count');
+    resolverAggregate.query();
+
+    if (resolverAggregate.next() && resolverAggregate.getAggregate('count') > 0) {
+		gs.addErrorMessage(gs.getMessage('Resolver already defined for {0} type. Only one resolver can be defined for a type.', GlideStringUtil.escapeHTML(current.type_name)));
+        current.setAbortAction(true);
+    }
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-03-23 23:40:19</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>1d98ba28c7b300101666868cb8c26073</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>Validate only one resolver per type</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="GraphQL API Framework" source="com.glide.graphql.framework">d9dfc7f0d00322105590fd9a5a77e730</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_1d98ba28c7b300101666868cb8c26073</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:59</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=1d98ba28c7b300101666868cb8c26073"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc23cb0000002</claim_timestamp>
+        <metadata_update_name>sys_script_1d98ba28c7b300101666868cb8c26073</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:59</sys_created_on>
+        <sys_id>f31f7fea47ecb2105dc6f19f016d439e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:59</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc23cb0000001</claim_timestamp>
+        <metadata_update_name>sys_script_1d98ba28c7b300101666868cb8c26073</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.graphql.framework</previous_claim_name>
+        <previous_claim_scope>com.glide.graphql.framework</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:59</sys_created_on>
+        <sys_id>b71f7fea47ecb2105dc6f19f016d439e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:59</sys_updated_on>
+    </sys_claim>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>1d98ba28c7b300101666868cb8c26073</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-07-23 18:31:21</sys_created_on>
+        <sys_id>554ffdca37230210eeda86e864924b71</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-07-23 18:31:21</sys_updated_on>
+        <table>sys_script</table>
+        <use_es_latest>false</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

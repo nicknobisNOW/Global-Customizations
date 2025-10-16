@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_context_config">
+    <sys_search_context_config action="INSERT_OR_UPDATE">
+        <attachment_limit/>
+        <collapse_attachment>true</collapse_attachment>
+        <enable_exact_match>true</enable_exact_match>
+        <evam_definition/>
+        <filter_genius_results_by_search_source>false</filter_genius_results_by_search_source>
+        <genius_results_limit>1</genius_results_limit>
+        <hit_highlighting>false</hit_highlighting>
+        <log_signals_server_side>false</log_signals_server_side>
+        <name>Virtual Agent Default Search Application</name>
+        <search_engine>ai_search</search_engine>
+        <search_profile display_value="Service Portal Default Search Profile">bd568e85772300102d71af6168106198</search_profile>
+        <search_results_limit>10</search_results_limit>
+        <show_disabled_facets>false</show_disabled_facets>
+        <show_tab_counts>true</show_tab_counts>
+        <spell_check>false</spell_check>
+        <suggestions_to_show_limit>10</suggestions_to_show_limit>
+        <sys_class_name>sys_search_context_config</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-27 23:38:20</sys_created_on>
+        <sys_id>2963a5fa530020103296ddeeff7b129f</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Virtual Agent Default Search Application</sys_name>
+        <sys_package display_value="Glide Conversation Server" source="com.glide.cs">ef4d57b0d08722105590fd9a5a77e761</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_search_context_config_2963a5fa530020103296ddeeff7b129f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:46</sys_updated_on>
+        <ts_index_group/>
+        <view/>
+    </sys_search_context_config>
+    <sys_translated_text action="delete_multiple" query="documentkey=2963a5fa530020103296ddeeff7b129f"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbf1360000001</claim_timestamp>
+        <metadata_update_name>sys_search_context_config_2963a5fa530020103296ddeeff7b129f</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:46</sys_created_on>
+        <sys_id>6c1f3bea47ecb2105dc6f19f016d4372</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:46</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbf1350000001</claim_timestamp>
+        <metadata_update_name>sys_search_context_config_2963a5fa530020103296ddeeff7b129f</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.cs</previous_claim_name>
+        <previous_claim_scope>com.glide.cs</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:46</sys_created_on>
+        <sys_id>201f3bea47ecb2105dc6f19f016d4373</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:46</sys_updated_on>
+    </sys_claim>
+</record_update>

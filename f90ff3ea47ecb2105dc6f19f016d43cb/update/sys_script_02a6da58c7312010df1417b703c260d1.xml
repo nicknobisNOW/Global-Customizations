@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_auth_policy_context</collection>
+        <condition>current.getUniqueValue() == '62c7e85773112010616ca9843cf6a78e'</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>PreAuthContextPolicyTypeValidation</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    var defaultPolicy = current.default_policy;
+
+    var policyId = current.allow_policy;
+
+    if (defaultPolicy == 'deny_policy')
+        policyId = current.deny_policy;
+
+    isPolicyTypeAllowed(policyId);
+
+    function isPolicyTypeAllowed(authPolicy) {
+        var policyType = authPolicy.type;
+        if (policyType == 'post_auth') {
+            gs.addErrorMessage(gs.getMessage("Any policy bound to 'Pre Authentication Policy Context' doesn't allow filter criteria other than the {0}, {1} and {2}. Kindly update the policy conditions or use a different policy that uses {0} criteria, {1} and {2}.", ["IP Filter", "Trusted Mobile App Filter", "Location Based Filter"]));
+            current.setAbortAction(true);
+            return;
+        }
+    }
+
+    /*
+		Validate for the Default Policy field changes or Validate for the Policy changes only if the policy reference changes
+		This handles below two use cases: 
+		1) Default Policy field changes from allow to deny or vice versa in Pre-Auth Context
+		2) Policy Reference change in Pre-Auth context
+    */
+    if (current.default_policy.changes() || (defaultPolicy == 'allow_policy' && current.allow_policy.changes()) || (defaultPolicy == 'deny_policy' && current.deny_policy.changes())) {
+        // send the default and the corresponding policy
+        try {
+            var isValid = SNC.AuthPolicyIPUtil.validateDefaultPolicyOptionOrPolicyRefChange(defaultPolicy, policyId);
+            // abort if session will be blocked
+			if (!isValid) {
+                gs.addErrorMessage(gs.getMessage("Current session may get blocked by the attached Authentication policy due to this operation. Aborting the operation."));
+                current.setAbortAction(true);
+				return;
+            }
+        } catch (ex) {
+            message = "Exception while updating the Default Policy or the Policy references in Pre-Auth Context.";
+            message += ex.message;
+            gs.error(message);
+        }
+        
+    }
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-01-15 08:49:02</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>02a6da58c7312010df1417b703c260d1</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>PreAuthContextPolicyTypeValidation</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Adaptive Authentication" source="com.snc.adaptive_authentication">af089ff4d00722105590fd9a5a77e7d4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_02a6da58c7312010df1417b703c260d1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:41</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=02a6da58c7312010df1417b703c260d1"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcc7d60000002</claim_timestamp>
+        <metadata_update_name>sys_script_02a6da58c7312010df1417b703c260d1</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:41</sys_created_on>
+        <sys_id>0a4f7f2e47ecb2105dc6f19f016d4398</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:41</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcc7d60000001</claim_timestamp>
+        <metadata_update_name>sys_script_02a6da58c7312010df1417b703c260d1</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.adaptive_authentication</previous_claim_name>
+        <previous_claim_scope>com.snc.adaptive_authentication</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:41</sys_created_on>
+        <sys_id>ce4f7f2e47ecb2105dc6f19f016d4398</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:41</sys_updated_on>
+    </sys_claim>
+</record_update>

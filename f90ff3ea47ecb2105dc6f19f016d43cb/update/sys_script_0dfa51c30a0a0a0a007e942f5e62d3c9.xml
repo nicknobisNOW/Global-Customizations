@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>release_project</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>SNC Release Complete</name>
+        <order>200</order>
+        <priority/>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[gs.log("SNC Release Complete starting");
+
+var msg = 'Release '+current.name.getDisplayValue()+' for Product ' + current.product.getDisplayValue() + ' is complete';
+closeRelatedGivenRelease(current, msg);
+postDSL(current);
+
+gs.log("SNC Release Complete ending");
+
+// Find all related problems and close them
+function closeRelatedGivenRelease(me, msg) {
+	var features = new GlideRecord('release_feature');
+	features.addQuery('release', '=', me.sys_id);
+	features.query();
+	while (features.next()) {
+		closeRelatedGivenFeature(features, msg);
+	}
+}
+
+
+// Find related problems for a feature and close them
+function closeRelatedGivenFeature(me, msg) {
+	if (!me.rfc.isNil()) {
+		var rfc = new GlideRecord('change_request');
+		if (rfc.get('sys_id', me.rfc)) {
+			var chgReq = new ChangeRequest(rfc);
+			if (!chgReq.isClosed()) {
+				var notes = rfc.close_notes.getDisplayValue();
+				notes = notes + '\n' + (JSUtil.notNil(msg) ? msg : gs.getMessage("Closed"));
+				rfc.close_notes =  notes;
+				chgReq.close();
+				rfc.update();
+			}
+			if (!pm.isActive('com.snc.best_practice.problem.madrid.state_model'))
+				closeRelatedGivenChange(rfc, msg);
+		}
+	}
+}
+
+// Find related problems for a change_request and close them
+function closeRelatedGivenChange(me, msg) {
+	var problems = new GlideRecord('problem');
+	problems.addQuery('rfc', '=', me.sys_id);
+	problems.query();
+	while (problems.next()) {
+		problems.problem_state.setValue(4);
+		var notes = problems.close_notes.getDisplayValue();
+		notes = notes + '\n' + msg;
+		problems.close_notes.setValue(notes);
+		problems.update();
+	}
+}
+
+// Post all entries in the Definitive Software Library
+function postDSL(me) {
+	var relatedCI = new GlideRecord('release_cis');
+	relatedCI.addQuery('release', '=', me.sys_id);
+	relatedCI.query();
+	while (relatedCI.next()) {
+		gs.print("updating using ci "+relatedCI.ci_item);
+		postDSLGivenCI(relatedCI.ci_item, me.sys_id);
+	}
+	var features = new GlideRecord('release_feature');
+	features.addQuery('release', '=', me.sys_id);
+	features.query();
+	while (features.next()) {
+		postDSLGivenFeature(features, me.sys_id);
+	}
+}
+
+function postDSLGivenFeature(me, release) {
+	if (!me.rfc.isNil()) {
+		var rfc = new GlideRecord('change_request');
+		if (rfc.get('sys_id', me.rfc)) {
+			if (!rfc.cmdb_ci.isNil()) {
+				postDSLGivenCI(rfc.cmdb_ci, release);
+			}
+		}
+	}
+}
+
+
+
+// Post all entries in the Definitive Software Library
+function postDSLGivenCI(ciID, release) {
+	var cmdbci = new GlideRecord('cmdb_ci');
+	if (cmdbci.get('sys_id', ciID)) {
+		var dsl = new GlideRecord('dsl');
+		dsl.addQuery('ci', '=', cmdbci.sys_id);
+		dsl.query();
+		while (dsl.next()) {
+			dsl.pending = release;
+			dsl.pending_date = gs.now();
+			dsl.update();
+		}
+	}
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>glide.maint</sys_created_by>
+        <sys_created_on>2006-05-07 08:32:56</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>0dfa51c30a0a0a0a007e942f5e62d3c9</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>SNC Release Complete</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Release Management" source="com.snc.release_management">72a3537cd08322105590fd9a5a77e781</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_0dfa51c30a0a0a0a007e942f5e62d3c9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:45</sys_updated_on>
+        <template/>
+        <when>async</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0dfa51c30a0a0a0a007e942f5e62d3c9"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcd7250000001</claim_timestamp>
+        <metadata_update_name>sys_script_0dfa51c30a0a0a0a007e942f5e62d3c9</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:45</sys_created_on>
+        <sys_id>474fff2e47ecb2105dc6f19f016d433a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:45</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcd7240000001</claim_timestamp>
+        <metadata_update_name>sys_script_0dfa51c30a0a0a0a007e942f5e62d3c9</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.release_management</previous_claim_name>
+        <previous_claim_scope>com.snc.release_management</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:45</sys_created_on>
+        <sys_id>0f4fff2e47ecb2105dc6f19f016d433a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:45</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>true</advanced>
+        <applies_to/>
+        <condition/>
+        <controlled_by_refs/>
+        <decision_type>allow</decision_type>
+        <description>Allow create for records in sys_one_extend_eval_strategy_metric, if the ACL script returns true.</description>
+        <local_or_existing>Local</local_or_existing>
+        <name>sys_one_extend_eval_strategy_metric</name>
+        <operation display_value="create">create</operation>
+        <script><![CDATA[answer = gs.getSession().isLoggedIn();
+if (!answer) {
+    answer = gs.getProperty('glide.security.allow_unauth_roleless_acl', false);
+}]]></script>
+        <security_attribute/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-12-04 09:15:25</sys_created_on>
+        <sys_id>2ff40a8d439e1210f846cb181fb8f225</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>sys_one_extend_eval_strategy_metric</sys_name>
+        <sys_package display_value="Glide OneExtend" source="com.glide.one_extend">4db05ff8d00322105590fd9a5a77e782</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_security_acl_2ff40a8d439e1210f846cb181fb8f225</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:44</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbe99c0000002</claim_timestamp>
+        <metadata_update_name>sys_security_acl_2ff40a8d439e1210f846cb181fb8f225</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:44</sys_created_on>
+        <sys_id>541ff7ea47ecb2105dc6f19f016d4357</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:44</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbe99c0000001</claim_timestamp>
+        <metadata_update_name>sys_security_acl_2ff40a8d439e1210f846cb181fb8f225</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.one_extend</previous_claim_name>
+        <previous_claim_scope>com.glide.one_extend</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:44</sys_created_on>
+        <sys_id>181ff7ea47ecb2105dc6f19f016d4357</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:44</sys_updated_on>
+    </sys_claim>
+</record_update>

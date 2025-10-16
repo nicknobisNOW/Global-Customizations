@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_dictionary</collection>
+        <condition>current.internal_type == 'dynamic_attribute_store' || previous.internal_type == 'dynamic_attribute_store'</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Before Ins/Up DynamicAttributeStore</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    if (current.operation() == 'update' && current.internal_type != previous.internal_type) {
+        gs.addErrorMessage(gs.getMessage(
+            "Modifying the type of an element to or from 'Dynamic Attribute Store' is not allowed."
+        ));
+        current.setAbortAction(true);
+        return;
+    }
+
+    if (current.dependent_on_field) {
+        var ce = new GlideCompositeElement(current.dependent_on_field, current.name);
+        if (ce.isValid()) {
+            var internalType = ce.getTargetED().getInternalType();
+            var reference = ce.getTargetED().getReference();
+
+            if ((internalType == "glide_list" || internalType == "reference") &&
+                (reference == "dynamic_attribute_group" || reference == "dynamic_category" || reference == "dynamic_attribute"))
+                return;
+        }
+
+        gs.addErrorMessage(gs.getMessage(
+            "'Dependent on field' must be a reference to one or more Dynamic Categories, Dynamic Attribute Groups or Dynamic Attributes."
+        ));
+        current.setAbortAction(true);
+    }
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>maint</sys_created_by>
+        <sys_created_on>2023-10-24 23:05:18</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>077374527f06311090f8d1056f2a0c43</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_name>Before Ins/Up DynamicAttributeStore</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Dynamic Schema Support" source="com.glide.dynamic_schema">5e415f30d04322105590fd9a5a77e7bc</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_077374527f06311090f8d1056f2a0c43</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:25</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=077374527f06311090f8d1056f2a0c43"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc89b30000001</claim_timestamp>
+        <metadata_update_name>sys_script_077374527f06311090f8d1056f2a0c43</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:25</sys_created_on>
+        <sys_id>923ff72e47ecb2105dc6f19f016d4374</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:25</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc89b20000001</claim_timestamp>
+        <metadata_update_name>sys_script_077374527f06311090f8d1056f2a0c43</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.dynamic_schema</previous_claim_name>
+        <previous_claim_scope>com.glide.dynamic_schema</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:25</sys_created_on>
+        <sys_id>563ff72e47ecb2105dc6f19f016d4374</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:25</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="ais_search_profile">
+    <ais_search_profile action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <creator_source/>
+        <description>This is the AIS profile to search KB articles through quick actions</description>
+        <exclude_from_evaluation>false</exclude_from_evaluation>
+        <genius_result_assembly/>
+        <label>Quick Action - KB Search Profile</label>
+        <name>quick_action_kb_search_profile</name>
+        <publish_id/>
+        <qna_model_id>bert-qa-model-1.1.6</qna_model_id>
+        <state>NEW</state>
+        <sys_class_name>ais_search_profile</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-01-12 22:13:26</sys_created_on>
+        <sys_id>0d6e994dc30101103f4fcd7b7940ddf6</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Quick Action - KB Search Profile</sys_name>
+        <sys_package display_value="Glide Conversation Server" source="com.glide.cs">ef4d57b0d08722105590fd9a5a77e761</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>ais_search_profile_0d6e994dc30101103f4fcd7b7940ddf6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:32</sys_updated_on>
+    </ais_search_profile>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadca3940000002</claim_timestamp>
+        <metadata_update_name>ais_search_profile_0d6e994dc30101103f4fcd7b7940ddf6</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:32</sys_created_on>
+        <sys_id>b73f7b2e47ecb2105dc6f19f016d43f2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:32</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadca3940000001</claim_timestamp>
+        <metadata_update_name>ais_search_profile_0d6e994dc30101103f4fcd7b7940ddf6</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.cs</previous_claim_name>
+        <previous_claim_scope>com.glide.cs</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:32</sys_created_on>
+        <sys_id>7b3f7b2e47ecb2105dc6f19f016d43f2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:32</sys_updated_on>
+    </sys_claim>
+</record_update>

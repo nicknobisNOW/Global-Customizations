@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_declarative_action_assignment</collection>
+        <condition>current.model=="360935e9534723003eddddeeff7b127d" &amp;&amp; current.form_position=="action_bar" </condition>
+        <description>For Action Bar Declarative Actions, add UX Form Actions if Enable For All Experiences is checked. So, the action is visible in all experiences.</description>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Setup UX Form Action Info</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    /**
+     * 
+     * This script gets executed only for Action Bar Declarative Actions
+     * on Insert / Update 
+     * Create UX Form Action Record only if there is no existing record 
+     * 
+     */
+
+    var uxFormActionUtil = new UXFormActionUtil();
+
+    var declarativeActionSysId = current.sys_id;
+    var tableName = current.table;
+    var actionName = current.label || current.action_name;
+    var actionLabel = current.label;
+    var actionType = uxFormActionUtil.UX_FORM_ACTION_TYPE.DECLARATIVE_ACTION;
+    var formActionCreated = false;
+
+    //check if Form Action exists
+    var formActionId = uxFormActionUtil.getUXFormAction(tableName, declarativeActionSysId, actionType);
+    if (!formActionId) {
+        //create UX Form Action
+        formActionId = uxFormActionUtil.createUXFormAction(tableName, declarativeActionSysId, actionType, actionName);
+        formActionCreated = true;
+    }
+
+    //check if Layout Item exists
+    var layoutItem = uxFormActionUtil.getUXFormActionLayoutItem(tableName, formActionId, false);
+    if (!layoutItem) {
+        //create UX Form Action Layout Item
+        layoutItem = uxFormActionUtil.createUXFormActionLayoutItem(tableName, actionName, formActionId, null, declarativeActionSysId);
+
+        //inform user with message
+        if (layoutItem) {
+            var layoutItemTableDesc = gs.getMessage('UX Form Action Layout Item');
+            var link = '<a href="sys_ux_form_action_layout_item.do?sys_id=' + layoutItem.sys_id + '">' + layoutItemTableDesc + '</a>';
+            var message = gs.getMessage('UX Form Action Layout Item record has been auto-created for {0}.', [actionLabel]);
+            if (formActionCreated) {
+                message = gs.getMessage('UX Form Action and UX Form Action Layout Item records have been auto-created for {0}.', [actionLabel]);
+            }
+            message = message + gs.getMessage(' You can update the default look and feel of the button on the {0}.', [link]);
+            gs.addInfoMessage(message);
+        } else {
+            gs.addErrorMessage(gs.getMessage("Unable to auto-create UX Form Action Layout Item record for {0}.", [actionLabel]));
+        }
+        action.setRedirectURL(current);
+    }
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-08-29 02:30:30</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>0b62e8ea0569d910f877a261ed35bb86</sys_id>
+        <sys_mod_count>52</sys_mod_count>
+        <sys_name>Setup UX Form Action Info</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Agent Workspace - Declarative Actions" source="com.snc.agent_workspace.declarative_actions">5a489778d00722105590fd9a5a77e76b</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_0b62e8ea0569d910f877a261ed35bb86</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:45</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0b62e8ea0569d910f877a261ed35bb86"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbebf70000001</claim_timestamp>
+        <metadata_update_name>sys_script_0b62e8ea0569d910f877a261ed35bb86</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:45</sys_created_on>
+        <sys_id>9c1ff7ea47ecb2105dc6f19f016d43ab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:45</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbebf60000001</claim_timestamp>
+        <metadata_update_name>sys_script_0b62e8ea0569d910f877a261ed35bb86</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.agent_workspace.declarative_actions</previous_claim_name>
+        <previous_claim_scope>com.snc.agent_workspace.declarat</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:45</sys_created_on>
+        <sys_id>501ff7ea47ecb2105dc6f19f016d43ac</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:45</sys_updated_on>
+    </sys_claim>
+</record_update>

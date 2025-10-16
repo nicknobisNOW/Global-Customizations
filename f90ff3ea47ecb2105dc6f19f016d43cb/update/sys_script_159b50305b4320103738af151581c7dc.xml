@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_sg_location_item_stream</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="sys_sg_location_item_stream">is_custom_location=false^EQ<item endquery="false" field="is_custom_location" goto="false" newquery="false" operator="=" or="false" value="false"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Validate location</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    var table = current.getValue("table");
+    var location = current.getValue("location");
+    var references = location.split(".");
+    var currentReferenceTable = table;
+
+    for (var i = 0; i < references.length; i++) {
+        var refTable = new GlideRecord(currentReferenceTable);
+        if (!refTable.isValid()) {
+            currentReferenceTable = "";
+            break;
+        }
+
+        currentReferenceTable = refTable.getElement(references[i]).getReferenceTable();
+    }
+
+    if (current.getValue('location_source') === 'location') {
+        if (currentReferenceTable === "cmn_location")
+            return;
+
+        gs.addErrorMessage(gs.getMessage("Location must be referencing a source of type Locations (cmn_location)."));
+        current.setAbortAction(true);
+    }
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-03-19 16:31:20</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>159b50305b4320103738af151581c7dc</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>Validate location</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Mobile Custom Map" source="com.glide.sg.custom_map">74211bfcd00322105590fd9a5a77e7e7</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_159b50305b4320103738af151581c7dc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:47</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=159b50305b4320103738af151581c7dc"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcdd820000002</claim_timestamp>
+        <metadata_update_name>sys_script_159b50305b4320103738af151581c7dc</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:47</sys_created_on>
+        <sys_id>9f4fff2e47ecb2105dc6f19f016d43f4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:47</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcdd820000001</claim_timestamp>
+        <metadata_update_name>sys_script_159b50305b4320103738af151581c7dc</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.sg.custom_map</previous_claim_name>
+        <previous_claim_scope>com.glide.sg.custom_map</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:47</sys_created_on>
+        <sys_id>574fff2e47ecb2105dc6f19f016d43f5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:47</sys_updated_on>
+    </sys_claim>
+</record_update>

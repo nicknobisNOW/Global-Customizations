@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_api_access_policy</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="sys_api_access_policy">api_path=now/table^EQ<item endquery="false" field="api_path" goto="false" newquery="false" operator="=" or="false" value="now/table"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Validate Unique Table API  Policy</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	var gr = new GlideRecord('sys_api_access_policy');
+	gr.addQuery('active', current.active);
+	gr.addQuery('api_path', current.api_path);
+	gr.addQuery('version', current.version);
+	gr.addQuery('http_method', current.http_method);
+	gr.addQuery('api_resource', current.api_resource);
+	gr.addQuery('apply_all_methods', current.apply_all_methods);
+	gr.addQuery('apply_all_versions', current.apply_all_versions);
+	gr.addQuery('apply_all_resources', current.apply_all_resources);
+	gr.addQuery('apply_global', current.apply_global);
+	gr.addQuery('apply_all', current.apply_all);
+    gr.addQuery('apply_all_tables', current.apply_all_tables);
+
+	if (!current.apply_all_tables) {
+        var currentTables = current.api_tablename.split(',');
+		
+		if (currentTables.length > 0) {
+			var qc = gr.addQuery('api_tablename', 'CONTAINS', currentTables[0]);
+		}
+        
+		for (var i = 1; i < currentTables.length; i++) {
+            qc.addOrCondition('api_tablename', 'CONTAINS', currentTables[i]);
+        }
+    }
+
+    gr.query();
+
+	if (gr.next() && (current.active)) {
+		gs.addErrorMessage(gs.getMessage('Another TableAPI policy with the same table configuration is active. Duplicate policy id: ' + gr.sys_id));
+		current.api_tablename = '';
+		current.setAbortAction(true);
+	}
+        
+        
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-07-27 15:24:29</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>1da2b51f43630210b6f9a0246bb8f292</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_name>Validate Unique Table API  Policy</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="REST API Access Policy Plugin" source="com.glide.rest.policy">2b089ff4d00722105590fd9a5a77e7d3</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_1da2b51f43630210b6f9a0246bb8f292</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:41</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=1da2b51f43630210b6f9a0246bb8f292"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbdc9a0000002</claim_timestamp>
+        <metadata_update_name>sys_script_1da2b51f43630210b6f9a0246bb8f292</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:41</sys_created_on>
+        <sys_id>1b0fb7ea47ecb2105dc6f19f016d433a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:41</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbdc9a0000001</claim_timestamp>
+        <metadata_update_name>sys_script_1da2b51f43630210b6f9a0246bb8f292</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.rest.policy</previous_claim_name>
+        <previous_claim_scope>com.glide.rest.policy</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:41</sys_created_on>
+        <sys_id>df0fb7ea47ecb2105dc6f19f016d433a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:41</sys_updated_on>
+    </sys_claim>
+</record_update>

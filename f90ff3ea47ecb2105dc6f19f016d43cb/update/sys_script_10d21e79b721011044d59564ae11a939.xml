@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>oauth_entity</collection>
+        <condition>!current.sys_id.nil()</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Find Profiles Without Assertion Producer</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	// Get all the SAML2 grant type oauth_entity_profile(s) that are associated with current Oauth Entity 
+	// and have missing SAML2 Assertion Producer reference.
+	var gr = new GlideRecord("oauth_entity_profile");
+	gr.initialize();
+	gr.addQuery("oauth_entity", current.sys_id);
+	gr.addQuery("grant_type", 'urn:ietf:params:oauth:grant-type:saml2-bearer');
+	gr.addNullQuery("saml2_assertion_producer");
+	gr.query();
+	
+	// Show a error message on top if there are 1 or more such oauth_entity_profile(s).
+	if(gr.getRowCount()>0){
+		var msg = gs.getMessage('Your configuration has missing SAML2 Assertion producer records in one or more entity profiles. A SAML2 Assertion producer record must be mapped to the entity profile record when grant type is SAML2 Bearer.');
+		gs.addErrorMessage(msg);
+	}
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-02-09 06:36:46</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>10d21e79b721011044d59564ae11a939</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Find Profiles Without Assertion Producer</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="OAuth 2.0" source="com.snc.platform.security.oauth">1a501b38d00322105590fd9a5a77e781</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_10d21e79b721011044d59564ae11a939</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:35</sys_updated_on>
+        <template/>
+        <when>before_display</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=10d21e79b721011044d59564ae11a939"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcaf150000001</claim_timestamp>
+        <metadata_update_name>sys_script_10d21e79b721011044d59564ae11a939</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:35</sys_created_on>
+        <sys_id>244fbb2e47ecb2105dc6f19f016d43f3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:35</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcaf140000001</claim_timestamp>
+        <metadata_update_name>sys_script_10d21e79b721011044d59564ae11a939</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.platform.security.oauth</previous_claim_name>
+        <previous_claim_scope>com.snc.platform.security.oauth</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:35</sys_created_on>
+        <sys_id>e84fbb2e47ecb2105dc6f19f016d43f3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:35</sys_updated_on>
+    </sys_claim>
+</record_update>

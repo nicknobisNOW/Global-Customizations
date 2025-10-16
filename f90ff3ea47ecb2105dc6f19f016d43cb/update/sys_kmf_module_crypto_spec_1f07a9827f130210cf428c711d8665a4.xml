@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_kmf_module_crypto_spec">
+    <sys_kmf_module_crypto_spec action="INSERT_OR_UPDATE">
+        <algorithm display_value="EC 256 NIST SUITE B SHA 256">b3ecfaab35173010f877f70105923b1a</algorithm>
+        <alias>glide_usage_analytics_token_signing --- Signature Generation</alias>
+        <auto_generate_key>true</auto_generate_key>
+        <crypto_module display_value="glide_usage_analytics_token_signing">bc26a5427f130210cf428c711d866559</crypto_module>
+        <crypto_purpose display_value="Signature Generation">299fb3a4c7003300af4d43c6f097633c</crypto_purpose>
+        <download_wrapping_key/>
+        <enroll_module_for_resource_exchange>false</enroll_module_for_resource_exchange>
+        <generate_key>1230c3bb0bc83300af4deaf1a3673a8a</generate_key>
+        <import_key_from_keystore>0b0e5336c7003300af4d43c6f0976315</import_key_from_keystore>
+        <integrity_preserving>false</integrity_preserving>
+        <key_alias/>
+        <key_type display_value="Private Signature Generation Key">eacabf24c7003300af4d43c6f0976341</key_type>
+        <key_version>-1</key_version>
+        <origin>servicenow</origin>
+        <sn_kmf_state>key_creation</sn_kmf_state>
+        <sys_class_name>sys_kmf_module_crypto_spec</sys_class_name>
+        <sys_created_by>maint</sys_created_by>
+        <sys_created_on>2024-07-11 06:35:44</sys_created_on>
+        <sys_id>1f07a9827f130210cf428c711d8665a4</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>glide_usage_analytics_token_signing --- Signature Generation</sys_name>
+        <sys_package display_value="User Experience Analytics" source="com.glide.appsee">69019bbcd00322105590fd9a5a77e72d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_kmf_module_crypto_spec_1f07a9827f130210cf428c711d8665a4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:43</sys_updated_on>
+        <upload_csk>a4bff7d453010010cd1eddeeff7b12b0</upload_csk>
+    </sys_kmf_module_crypto_spec>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbe66b0000002</claim_timestamp>
+        <metadata_update_name>sys_kmf_module_crypto_spec_1f07a9827f130210cf428c711d8665a4</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:43</sys_created_on>
+        <sys_id>8c1ff7ea47ecb2105dc6f19f016d4310</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:43</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbe66b0000001</claim_timestamp>
+        <metadata_update_name>sys_kmf_module_crypto_spec_1f07a9827f130210cf428c711d8665a4</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.appsee</previous_claim_name>
+        <previous_claim_scope>com.glide.appsee</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:43</sys_created_on>
+        <sys_id>441ff7ea47ecb2105dc6f19f016d4311</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:43</sys_updated_on>
+    </sys_claim>
+</record_update>

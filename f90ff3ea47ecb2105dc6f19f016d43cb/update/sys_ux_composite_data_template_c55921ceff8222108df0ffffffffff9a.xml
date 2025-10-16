@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_composite_data_template">
+    <sys_ux_composite_data_template action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <name>Catalog Search Template Order Guides v2</name>
+        <sys_class_name>sys_ux_composite_data_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-06-11 19:43:36</sys_created_on>
+        <sys_id>c55921ceff8222108df0ffffffffff9a</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Catalog Search Template Order Guides v2</sys_name>
+        <sys_package display_value="Service Portal - Core" source="com.glide.service-portal">e4759778d0c322105590fd9a5a77e79d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_ux_composite_data_template_c55921ceff8222108df0ffffffffff9a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:12</sys_updated_on>
+        <template>{
+    "component": "sn-search-result-evam-card",
+    "staticValues": {
+        "imageType": {
+            "translatable": false,
+            "key": "icon"
+        },
+        "customIcon": {
+            "translatable": false,
+            "key": "book-color-24.svg"
+        },
+        "icon": {
+            "translatable": false,
+            "key": "pencil-page-outline"
+        }
+    },
+    "mappings": {
+        "imageURL": "picture",
+        "textHeaderLabelOne": "sc_catalogs",
+        "textHeaderLabelTwo": "category",
+        "title": "ai_search_teaser_title",
+        "summary": "ai_search_teaser_text",
+        "detailLabelOne": "price",
+        "attachments": "child_docs"
+    },
+    "actionMappings": {
+        "clickAction": "navigation_sc_order_guides"
+    }
+}</template>
+    </sys_ux_composite_data_template>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc54d70000001</claim_timestamp>
+        <metadata_update_name>sys_ux_composite_data_template_c55921ceff8222108df0ffffffffff9a</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:12</sys_created_on>
+        <sys_id>322fb32e47ecb2105dc6f19f016d436c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:12</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc54d60000001</claim_timestamp>
+        <metadata_update_name>sys_ux_composite_data_template_c55921ceff8222108df0ffffffffff9a</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.service-portal</previous_claim_name>
+        <previous_claim_scope>com.glide.service-portal</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:12</sys_created_on>
+        <sys_id>f62fb32e47ecb2105dc6f19f016d436c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:12</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_user_multi_factor_setup</collection>
+        <condition/>
+        <description>This business rule resets the is_recent_factor column appropriately based on the logic that only one factor among all the factors setup by the user can only set as the recent used factor</description>
+        <execute_function>false</execute_function>
+        <filter_condition table="sys_user_multi_factor_setup">is_recent_factorCHANGESTOtrue^EQ<item endquery="false" field="is_recent_factor" goto="false" newquery="false" operator="CHANGESTO" or="false" value="true"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Mark Non Recent Used Factors</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+    try {
+		SNC.MultifactorAuthUtil.markNonRecentFactor(current.user, current.factor_type);
+    } catch (e) {
+        gs.error("Set Most Recent Used Factor BR: error occured while setting the recent factor for user:" + current.user + ", error: " + e);
+	}
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>maint</sys_created_by>
+        <sys_created_on>2024-03-28 10:29:56</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>034ce510779102104bb41646ba5a996c</sys_id>
+        <sys_mod_count>46</sys_mod_count>
+        <sys_name>Mark Non Recent Used Factors</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Integration - Multifactor Authentication" source="com.snc.integration.multifactor.authentication">8d41db30d04322105590fd9a5a77e74e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_034ce510779102104bb41646ba5a996c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:03</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=034ce510779102104bb41646ba5a996c"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc32260000002</claim_timestamp>
+        <metadata_update_name>sys_script_034ce510779102104bb41646ba5a996c</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:03</sys_created_on>
+        <sys_id>fc2fffea47ecb2105dc6f19f016d432e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:03</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc32260000001</claim_timestamp>
+        <metadata_update_name>sys_script_034ce510779102104bb41646ba5a996c</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.integration.multifactor.authentication</previous_claim_name>
+        <previous_claim_scope>com.snc.integration.multifactor.</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:03</sys_created_on>
+        <sys_id>b42fffea47ecb2105dc6f19f016d432f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:03</sys_updated_on>
+    </sys_claim>
+</record_update>

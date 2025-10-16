@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>cmn_map_page</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Geocode Address</name>
+        <order>200</order>
+        <priority/>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[if (!current.center_address.nil()) {
+   var point=GoogleMapsHelper.google_getLatLong(current.center_address + '');
+   if (point[0] && point[1]) {
+      current.center_latitude = point[0];
+      current.center_longitude = point[1];
+   }
+}
+]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>glide.maint</sys_created_by>
+        <sys_created_on>2008-05-19 09:16:08</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>00753610c0a8000c00abbab8f1ad970a</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>Geocode Address</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Google Maps Plugin" source="com.glideapp.google_maps">2f149730d0c322105590fd9a5a77e7be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_00753610c0a8000c00abbab8f1ad970a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:39</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=00753610c0a8000c00abbab8f1ad970a"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcbf1e0000001</claim_timestamp>
+        <metadata_update_name>sys_script_00753610c0a8000c00abbab8f1ad970a</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:39</sys_created_on>
+        <sys_id>a54f3f2e47ecb2105dc6f19f016d4378</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:39</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcbf1d0000001</claim_timestamp>
+        <metadata_update_name>sys_script_00753610c0a8000c00abbab8f1ad970a</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glideapp.google_maps</previous_claim_name>
+        <previous_claim_scope>com.glideapp.google_maps</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:39</sys_created_on>
+        <sys_id>694f3f2e47ecb2105dc6f19f016d4378</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:39</sys_updated_on>
+    </sys_claim>
+</record_update>

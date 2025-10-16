@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>help_guidance</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="help_guidance">type=global_setup^EQ<item display_value="Global Setup" endquery="false" field="type" goto="false" newquery="false" operator="=" or="false" value="global_setup"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Create PAD process</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous) {
+    var pad_sys_id = gs.generateGUID().toString();
+
+    // It is used to set the trigger type of process to `Record Create or Update`
+    var TRIGGER_TYPE_RECORD_CREATED_OR_UPDATE = '789911170f1200108c87f4f0ff767e27';
+
+    var currentGuidanceSysId = current.sys_id;
+    var gsName = current.name;
+    var gsDescription = current.description;
+
+    var processTriggerGR = new GlideRecord('sys_pd_trigger_instance');
+    processTriggerGR.initialize();
+    processTriggerGR.setValue('process_definition', pad_sys_id);
+    processTriggerGR.setValue('trigger_type', TRIGGER_TYPE_RECORD_CREATED_OR_UPDATE);
+    processTriggerGR.setValue('label', 'Trigger for ' + gsName);
+
+    var processTriggerID = processTriggerGR.insert();
+
+    var process = {
+        "sysId": pad_sys_id,
+        "label": gsName,
+        "description": gsDescription,
+	"sysScope": current.sys_scope,
+        "triggerRecordData": {
+            "triggerType": {
+                "value": TRIGGER_TYPE_RECORD_CREATED_OR_UPDATE
+            },
+            "triggerInstanceId": processTriggerID,
+            "inputs": {
+                "variables": [{
+                        "variableName": "table",
+                        "variableValue": "help_user_interaction",
+                        "variableMapping": null
+                    },
+                    {
+                        "variableName": "condition",
+                        "variableValue": "guidance.process_definition=" + pad_sys_id,
+                        "variableMapping": null
+                    },
+                    {
+                        "variableName": "run_on_extended",
+                        "variableValue": "false",
+                        "variableMapping": null
+                    }
+                ]
+            }
+        }
+    };
+
+    var pdProcessService = new PDProcessService();
+    pdProcessService.createProcess({
+        process: process
+    });
+
+    current.process_definition = pad_sys_id;
+    current.update();
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>maint</sys_created_by>
+        <sys_created_on>2023-12-07 12:03:39</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>18129510548b7110f877380e946029f8</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_name>Create PAD process</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ServiceNow Help and Guidance Backend" source="com.glide.sn_help">58f69f30d00722105590fd9a5a77e7f4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_18129510548b7110f877380e946029f8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:46</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=18129510548b7110f877380e946029f8"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcdc100000002</claim_timestamp>
+        <metadata_update_name>sys_script_18129510548b7110f877380e946029f8</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:46</sys_created_on>
+        <sys_id>174fff2e47ecb2105dc6f19f016d43d8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:46</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcdc100000001</claim_timestamp>
+        <metadata_update_name>sys_script_18129510548b7110f877380e946029f8</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.sn_help</previous_claim_name>
+        <previous_claim_scope>com.glide.sn_help</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:46</sys_created_on>
+        <sys_id>d74fff2e47ecb2105dc6f19f016d43d8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:46</sys_updated_on>
+    </sys_claim>
+</record_update>

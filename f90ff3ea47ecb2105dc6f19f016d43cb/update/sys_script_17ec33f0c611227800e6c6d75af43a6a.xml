@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>true</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_choice</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Choice Events</name>
+        <order>200</order>
+        <priority/>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[if (current.name == 'change_request' && current.element == 'phase') {
+   if (current.operation() == 'insert')
+      addChangePhase(current);
+   else if (current.operation() == 'delete') 
+      deleteChangePhase(current);
+   else if (current.operation() == 'update') {
+      if (current.value.changes()) {
+         deleteChangePhase(previous);
+         addChangePhase(current);
+      }
+   }
+}
+
+function addChangePhase(current) {
+   var gp = new GlideRecord('sys_choice');
+   gp.addQuery('name', '=', 'change_phase');
+   gp.addQuery('element', '=', 'name');
+   gp.addQuery('value', '=', current.value);
+   gp.query();
+   if (!gp.next()) {
+      gp.initialize();
+      gp.name='change_phase';
+      gp.element='name';
+      gp.value=current.value;
+      gp.label=current.label;
+      gp.insert();
+   }
+}
+
+function deleteChangePhase(me) {
+   var gc = new GlideRecord('sys_choice');
+   gc.addQuery('name', '=', 'change_request');
+   gc.addQuery('element', '=', 'phase');
+   gc.addQuery('value', '=', me.value);
+   gc.query();
+   if (!gc.next()) {
+      var gp = new GlideRecord('sys_choice');
+      gp.addQuery('name', '=', 'change_phase');
+      gp.addQuery('element', '=', 'name');
+      gp.addQuery('value', '=', me.value);
+      gp.query();
+      if (gp.next())
+         gp.deleteRecord();
+   }
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>glide.maint</sys_created_by>
+        <sys_created_on>2005-09-02 17:39:47</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>17ec33f0c611227800e6c6d75af43a6a</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>Choice Events</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Change Request" source="com.snc.change_request">a0c35f7cd08322105590fd9a5a77e712</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_17ec33f0c611227800e6c6d75af43a6a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:48</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=17ec33f0c611227800e6c6d75af43a6a"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbf94d0000001</claim_timestamp>
+        <metadata_update_name>sys_script_17ec33f0c611227800e6c6d75af43a6a</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:48</sys_created_on>
+        <sys_id>4d1f7bea47ecb2105dc6f19f016d434c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:48</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbf94c0000001</claim_timestamp>
+        <metadata_update_name>sys_script_17ec33f0c611227800e6c6d75af43a6a</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.change_request</previous_claim_name>
+        <previous_claim_scope>com.snc.change_request</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:48</sys_created_on>
+        <sys_id>011f7bea47ecb2105dc6f19f016d434d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:48</sys_updated_on>
+    </sys_claim>
+</record_update>

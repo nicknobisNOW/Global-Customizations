@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>false</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sc_req_item</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Test Variables</name>
+        <order>200</order>
+        <priority/>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[gs.print('yes_no  = ' + current.variable_pool.yes_no);
+gs.print('multiple_choice  = ' + current.variable_pool.multiple_choice);
+gs.print('select  = ' + current.variable_pool.select);
+gs.print('checbox = ' + current.variable_pool.checkbox);
+gs.print('scale = ' + current.variable_pool.scale);
+gs.print('date_time = ' + current.variable_pool.date_time);
+gs.print('date = ' + current.variable_pool.date);
+gs.print('single_text = ' + current.variable_pool.single_text);
+gs.print('reference = ' + current.variable_pool.reference);
+gs.print('multi_text= ' + current.variable_pool.multi_text);
+
+gs.print('yes_no  = ' + current.variable_pool.yes_no.getDisplayValue());
+gs.print('multiple_choice  = ' + current.variable_pool.multiple_choice.getDisplayValue());
+gs.print('select  = ' + current.variable_pool.select.getDisplayValue());
+gs.print('checbox = ' + current.variable_pool.checkbox.getDisplayValue());
+gs.print('scale = ' + current.variable_pool.scale.getDisplayValue());
+gs.print('date_time = ' + current.variable_pool.date_time.getDisplayValue());
+gs.print('date = ' + current.variable_pool.date.getDisplayValue());
+gs.print('single_text = ' + current.variable_pool.single_text.getDisplayValue());
+gs.print('reference = ' + current.variable_pool.reference.getDisplayValue());
+gs.print('multi_text= ' + current.variable_pool.multi_text.getDisplayValue());
+]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>glide.maint</sys_created_by>
+        <sys_created_on>2006-08-17 21:51:12</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>1e1dcfdbc0a8010700527386772560e9</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Test Variables</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Service Catalog Platform" source="com.glideapp.servicecatalog.platform">6c241b30d0c322105590fd9a5a77e758</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_1e1dcfdbc0a8010700527386772560e9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:53</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=1e1dcfdbc0a8010700527386772560e9"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc0c2f0000001</claim_timestamp>
+        <metadata_update_name>sys_script_1e1dcfdbc0a8010700527386772560e9</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:53</sys_created_on>
+        <sys_id>1e1ffbea47ecb2105dc6f19f016d431a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:53</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc0c2e0000001</claim_timestamp>
+        <metadata_update_name>sys_script_1e1dcfdbc0a8010700527386772560e9</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glideapp.servicecatalog.platform</previous_claim_name>
+        <previous_claim_scope>com.glideapp.servicecatalog.plat</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:53</sys_created_on>
+        <sys_id>d21ffbea47ecb2105dc6f19f016d431b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:53</sys_updated_on>
+    </sys_claim>
+</record_update>

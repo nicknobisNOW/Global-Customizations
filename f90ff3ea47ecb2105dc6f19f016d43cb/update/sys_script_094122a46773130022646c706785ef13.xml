@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>discovery_status</collection>
+        <condition>current.discover == "Cloud Resources" &amp;&amp;  (current.state == "Starting" || current.state == "Active")</condition>
+        <description>This business rule is responsible for initializing all the resources counts to 0 in "discovery_cloud_results" and also update LDC count, for a respective discovery status, whenever a discovery run is of type "Cloud Resources".</description>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Initialize Cloud Resources and LDC Count</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous) {
+	var i;
+	var finalCIsList;
+	var datacenterCount;
+	var statusSysID = current.getUniqueValue();
+	var scheduleSysID = current.getValue('dscheduler');
+	var cloudResourceDiscoveryUtil = new CloudResourceDiscoveryUtil();
+	var cloudResourceDiscoHandler = new CloudResourceDiscoveryCountHandler();
+	
+	/*
+	*	When a discovery is triggered for a schedule and if it's not a vCenter one's i.e., Schedule
+	*	associated to a Cloud Service Account whose datacenter type is not "cmdb_ci_vcenter_datacenter",
+	*	then for such kind of discovery run, we cache the discovered data into a cache table
+	*	("discoveyr_cloud_temp_results" table) and resource counts are updated by another business
+	*	rule ("Update Cloud Resources Counts") that is triggered when current Cloud Resource Discovery
+	*	run completes or get cancelled.
+	*	
+	*	If at all discovery triggered for vCenter Schedules then we don't cache result but just update
+	*	the resource counts at respective sensor(s) so in order to update, first we need have an entry for
+	*	that CI (e.g., "cmdb_ci_vm_instance") and its count set to 0 so that the count is updated
+	*	by respective hooks added at both CAPI and Pattern levels.
+	*/
+	
+	if (cloudResourceDiscoveryUtil.fetchDatacenterTypeFromSchedule(scheduleSysID) == 'cmdb_ci_vcenter_datacenter') {
+		finalCIsList = cloudResourceDiscoHandler.fetchAllChildCIsForParentCI('cmdb_ci');
+		
+		// Initialize the CI counts to 0 for each CI in "Discovery Cloud Results" table
+		for (i in finalCIsList)
+			cloudResourceDiscoHandler.setCloudResourceCount(scheduleSysID, statusSysID, finalCIsList[i]+'', 0);
+	}
+	
+	if (scheduleSysID) {
+		datacenterCount = new DiscoveryScheduleManager().getDatacenterCountForSchedule(scheduleSysID);
+		cloudResourceDiscoHandler.setCloudResourceCount(scheduleSysID, statusSysID, 'cmdb_ci_logical_datacenter', datacenterCount);
+	}
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-08-05 09:23:24</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>094122a46773130022646c706785ef13</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Initialize Cloud Resources and LDC Count</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Core Automation" source="com.snc.core.automation">99c45f34d0c322105590fd9a5a77e772</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_094122a46773130022646c706785ef13</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:24</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=094122a46773130022646c706785ef13"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc86650000002</claim_timestamp>
+        <metadata_update_name>sys_script_094122a46773130022646c706785ef13</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:24</sys_created_on>
+        <sys_id>ce3ff72e47ecb2105dc6f19f016d4331</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:24</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc86650000001</claim_timestamp>
+        <metadata_update_name>sys_script_094122a46773130022646c706785ef13</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.core.automation</previous_claim_name>
+        <previous_claim_scope>com.snc.core.automation</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:24</sys_created_on>
+        <sys_id>863ff72e47ecb2105dc6f19f016d4332</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:24</sys_updated_on>
+    </sys_claim>
+</record_update>

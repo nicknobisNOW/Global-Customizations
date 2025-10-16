@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>contract_sla</collection>
+        <condition>current.schedule_source+"" == 'sla_definition' &amp;&amp; JSUtil.notNil(current.schedule)</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>SLA Definition Empty Schedule Warning</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[SLAvalidation.warnEmptySchedules(current);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>james.grinter</sys_created_by>
+        <sys_created_on>2012-02-29 14:04:17</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>0682ea689f2020008f88ed93ee4bccb7</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>SLA Definition Empty Schedule Warning</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Service level management" source="com.snc.sla">e3f417b4d0c322105590fd9a5a77e7e4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_0682ea689f2020008f88ed93ee4bccb7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:44</sys_updated_on>
+        <template/>
+        <when>before_display</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0682ea689f2020008f88ed93ee4bccb7"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcd4520000001</claim_timestamp>
+        <metadata_update_name>sys_script_0682ea689f2020008f88ed93ee4bccb7</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:44</sys_created_on>
+        <sys_id>7a4fbf2e47ecb2105dc6f19f016d43e7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:44</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcd4510000001</claim_timestamp>
+        <metadata_update_name>sys_script_0682ea689f2020008f88ed93ee4bccb7</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.sla</previous_claim_name>
+        <previous_claim_scope>com.snc.sla</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:44</sys_created_on>
+        <sys_id>324fbf2e47ecb2105dc6f19f016d43e8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:44</sys_updated_on>
+    </sys_claim>
+</record_update>

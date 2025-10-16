@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_embedded_tour_element">
+    <sys_embedded_tour_element action="INSERT_OR_UPDATE">
+        <cell_edit/>
+        <cell_types/>
+        <col/>
+        <cxs_results/>
+        <element_type>textbox</element_type>
+        <field/>
+        <field_action/>
+        <field_header/>
+        <filters/>
+        <form_buttons>additional_actions</form_buttons>
+        <form_element>field</form_element>
+        <form_section/>
+        <frameset>nav_filter</frameset>
+        <js_path>macroponent-f51912f4c700201072b211d4d8c26010 &gt;&gt;&gt; sn-polaris-layout &gt;&gt;&gt; sn-polaris-header &gt;&gt;&gt; sn-polaris-menu.is-main-menu.is-pinned &gt;&gt;&gt; #filter</js_path>
+        <list_element>ui_action</list_element>
+        <list_header/>
+        <manual_css>input[id="filter"].form-control.form-control-search</manual_css>
+        <name>Filter Navigator</name>
+        <record_id/>
+        <related_field/>
+        <related_links/>
+        <related_list_element>ui_action</related_list_element>
+        <related_lists/>
+        <related_table/>
+        <row/>
+        <seismic_selector>input[id='filter']</seismic_selector>
+        <sys_class_name>sys_embedded_tour_element</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-01-13 06:37:03</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>5dcfa235c7120010ed6cdd34f2c2608d</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Filter Navigator</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Guided Setup for Performance Analytics" source="com.snc.pa.guided_setup">83975374d00722105590fd9a5a77e7a2</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_embedded_tour_element_5dcfa235c7120010ed6cdd34f2c2608d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:39</sys_updated_on>
+        <table/>
+        <type>manual_css</type>
+        <ui_action/>
+    </sys_embedded_tour_element>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcbf5b0000001</claim_timestamp>
+        <metadata_update_name>sys_embedded_tour_element_5dcfa235c7120010ed6cdd34f2c2608d</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:39</sys_created_on>
+        <sys_id>254f3f2e47ecb2105dc6f19f016d437e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:39</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcbf5a0000001</claim_timestamp>
+        <metadata_update_name>sys_embedded_tour_element_5dcfa235c7120010ed6cdd34f2c2608d</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.pa.guided_setup</previous_claim_name>
+        <previous_claim_scope>com.snc.pa.guided_setup</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:39</sys_created_on>
+        <sys_id>e94f3f2e47ecb2105dc6f19f016d437e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:39</sys_updated_on>
+    </sys_claim>
+</record_update>

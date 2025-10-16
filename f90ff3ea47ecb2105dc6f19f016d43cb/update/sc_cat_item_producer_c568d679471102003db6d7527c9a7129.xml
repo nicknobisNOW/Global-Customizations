@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_producer">
+    <sc_cat_item_producer action="INSERT_OR_UPDATE">
+        <access_type>restricted</access_type>
+        <active>true</active>
+        <additional_review>false</additional_review>
+        <allow_edit>false</allow_edit>
+        <availability>on_both</availability>
+        <billable>false</billable>
+        <can_cancel>false</can_cancel>
+        <category/>
+        <checked_out/>
+        <cost>0</cost>
+        <create_universal_request>false</create_universal_request>
+        <custom_cart/>
+        <delivery_plan display_value="DEFAULT">523da512c611228900811a37c97c2014</delivery_plan>
+        <delivery_plan_script/>
+        <delivery_time>1970-01-03 00:00:00</delivery_time>
+        <description><![CDATA[<p>Use this request to configure the data you want to send to a external location.</p>]]></description>
+        <display_price_property>non_zero</display_price_property>
+        <entitlement_script/>
+        <flow_designer_flow/>
+        <fulfillment_automation_level>unspecified</fulfillment_automation_level>
+        <group/>
+        <hide_sp>false</hide_sp>
+        <icon/>
+        <ignore_price>true</ignore_price>
+        <image/>
+        <location/>
+        <make_item_non_conversational>false</make_item_non_conversational>
+        <mandatory_attachment>false</mandatory_attachment>
+        <meta/>
+        <mobile_hide_price>false</mobile_hide_price>
+        <mobile_picture/>
+        <mobile_picture_type>use_desktop_picture</mobile_picture_type>
+        <model/>
+        <name>Create a new Export Set</name>
+        <no_attachment_v2>false</no_attachment_v2>
+        <no_cart>false</no_cart>
+        <no_cart_v2>false</no_cart_v2>
+        <no_delivery_time_v2>false</no_delivery_time_v2>
+        <no_order>false</no_order>
+        <no_order_now>false</no_order_now>
+        <no_proceed_checkout>false</no_proceed_checkout>
+        <no_quantity>false</no_quantity>
+        <no_quantity_v2>false</no_quantity_v2>
+        <no_save_as_draft>false</no_save_as_draft>
+        <no_search>false</no_search>
+        <no_wishlist_v2>false</no_wishlist_v2>
+        <omit_price>false</omit_price>
+        <order>0</order>
+        <ordered_item_link/>
+        <owner/>
+        <picture/>
+        <post_insert_script/>
+        <preview>JavaScript: popupOpenStandard("com.glideapp.servicecatalog_cat_item_view.do?v=1&amp;sysparm_id=c568d679471102003db6d7527c9a7129&amp;sysparm_preview=true", "summary");</preview>
+        <price>0</price>
+        <published_ref/>
+        <recurring_frequency/>
+        <recurring_price>0</recurring_price>
+        <redirect_url/>
+        <request_method/>
+        <roles/>
+        <save_options/>
+        <save_script/>
+        <sc_catalogs>e0d08b13c3330100c8b837659bba8fb4</sc_catalogs>
+        <sc_ic_item_staging/>
+        <sc_ic_version/>
+        <sc_template/>
+        <script><![CDATA[setUpRecord();
+
+function setUpRecord() {
+	var table = producer.table;
+	var esName =  producer.export_set;
+	
+	if(producer.is_definition_reference == 'no'){
+		var edName = esName+'_'+table;
+		var edGR = new GlideRecord('sys_export_definition');
+		edGR.setValue('name', edName);
+		edGR.setValue('table_name', table);
+		
+		var field_list = new ExportDefinitionHelper().getFields(table,'');
+		edGR.setValue('field_list', field_list.toString());
+		
+		edSysId = edGR.insert();
+	}else {
+		edSysId = producer.export_definition;
+	}
+	
+	if(producer.is_target_reference == 'no') {
+		var etName = esName +'_'+producer.mid_server;
+		var etGR = new GlideRecord('sys_export_target');
+		etGR.setValue('name', etName);
+		etGR.setValue('file_path', producer.file_path);
+		etGR.setDisplayValue('mid_server', producer.mid_server);
+		etSysId = etGR.insert();
+	}else {
+		etSysId = producer.export_target;
+	}
+	
+	current.name = esName;
+	current.export_definition = edSysId;
+	current.export_target = etSysId;
+	
+	producer.redirect = 'sys_export_set.do?sys_id='+current.sys_id+'&from_record_producer=true';
+}
+
+]]></script>
+        <short_description>Create a new Export Set to export data from ServiceNow instance to external locations.</short_description>
+        <show_variable_help_on_load>false</show_variable_help_on_load>
+        <start_closed>false</start_closed>
+        <state/>
+        <sys_class_name>sc_cat_item_producer</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2015-07-17 18:24:54</sys_created_on>
+        <sys_id>c568d679471102003db6d7527c9a7129</sys_id>
+        <sys_mod_count>28</sys_mod_count>
+        <sys_name>Create a new Export Set</sys_name>
+        <sys_package display_value="Basic Export Set Functionality" source="com.glide.system_export_set">4a6497b0d0c322105590fd9a5a77e7c0</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sc_cat_item_producer_c568d679471102003db6d7527c9a7129</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:23</sys_updated_on>
+        <table_name>sys_export_set</table_name>
+        <taxonomy_topic/>
+        <template/>
+        <template_manager_roles/>
+        <type>item</type>
+        <use_sc_layout>true</use_sc_layout>
+        <vendor/>
+        <version>19</version>
+        <view/>
+        <visible_bundle>true</visible_bundle>
+        <visible_guide>true</visible_guide>
+        <visible_standalone>true</visible_standalone>
+        <workflow/>
+    </sc_cat_item_producer>
+    <sys_translated_text action="delete_multiple" query="documentkey=c568d679471102003db6d7527c9a7129"/>
+    <fx_price action="delete_multiple" query="id=c568d679471102003db6d7527c9a7129"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>price</field>
+        <id>c568d679471102003db6d7527c9a7129</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2015-07-17 18:24:54</sys_created_on>
+        <sys_id>eed8d679471102003db6d7527c9a712b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2015-07-17 18:24:54</sys_updated_on>
+        <table>sc_cat_item_producer</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>recurring_price</field>
+        <id>c568d679471102003db6d7527c9a7129</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2015-07-17 18:24:54</sys_created_on>
+        <sys_id>22d8d679471102003db6d7527c9a712c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2015-07-17 18:24:54</sys_updated_on>
+        <table>sc_cat_item_producer</table>
+        <type>calculated</type>
+    </fx_price>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc81eb0000002</claim_timestamp>
+        <metadata_update_name>sc_cat_item_producer_c568d679471102003db6d7527c9a7129</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:23</sys_created_on>
+        <sys_id>313fb72e47ecb2105dc6f19f016d43e4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:23</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc81eb0000001</claim_timestamp>
+        <metadata_update_name>sc_cat_item_producer_c568d679471102003db6d7527c9a7129</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.system_export_set</previous_claim_name>
+        <previous_claim_scope>com.glide.system_export_set</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:23</sys_created_on>
+        <sys_id>f13fb72e47ecb2105dc6f19f016d43e4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:23</sys_updated_on>
+    </sys_claim>
+</record_update>

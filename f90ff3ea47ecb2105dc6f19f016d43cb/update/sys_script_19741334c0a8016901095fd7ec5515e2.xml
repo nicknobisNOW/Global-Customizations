@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>false</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>core_company</collection>
+        <condition>current.street.changes() || current.city.changes() || current.state.changes() || current.zip.changes() || current.country.changes()</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>get_lat_long</name>
+        <order>200</order>
+        <priority/>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[if (current != null) {
+  var street = new String(current.street);
+  street = street.replaceAll("\r","");
+  street = street.replaceAll("\n"," ");
+  var address = encodeParm(street) + " " + encodeParm(current.city) + " " + encodeParm(current.state) + " " + 
+  encodeParm(current.zip) + " " + encodeParm(current.country);
+  address = address.trim();
+	
+  if (address.length > 0) {
+      var point=GoogleMapsHelper.google_queueRequest(address, current);
+    }
+}
+
+// encodes non-Latin characters
+function encodeParm(parm) {
+   return GlideStringUtil.urlEncode(parm);
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>glide.maint</sys_created_by>
+        <sys_created_on>2006-01-30 03:56:10</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>19741334c0a8016901095fd7ec5515e2</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>get_lat_long</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Google Maps Plugin" source="com.glideapp.google_maps">2f149730d0c322105590fd9a5a77e7be</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_19741334c0a8016901095fd7ec5515e2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:36</sys_updated_on>
+        <template/>
+        <when>async</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=19741334c0a8016901095fd7ec5515e2"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbc7be0000001</claim_timestamp>
+        <metadata_update_name>sys_script_19741334c0a8016901095fd7ec5515e2</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:36</sys_created_on>
+        <sys_id>c60f37ea47ecb2105dc6f19f016d4345</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:36</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbc7bd0000001</claim_timestamp>
+        <metadata_update_name>sys_script_19741334c0a8016901095fd7ec5515e2</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glideapp.google_maps</previous_claim_name>
+        <previous_claim_scope>com.glideapp.google_maps</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:36</sys_created_on>
+        <sys_id>8a0f37ea47ecb2105dc6f19f016d4345</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:36</sys_updated_on>
+    </sys_claim>
+</record_update>

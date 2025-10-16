@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_kmf_crypto_caller_policy">
+    <sys_kmf_crypto_caller_policy action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <approval_type/>
+        <check_script_hash>false</check_script_hash>
+        <crypto_module display_value="glide_usage_analytics_token_signing">bc26a5427f130210cf428c711d866559</crypto_module>
+        <crypto_spec/>
+        <granular_operation/>
+        <identity_group_alias/>
+        <impersonation>false</impersonation>
+        <instance_recipient/>
+        <owner>2ddbe7fe64030210f40b54ffe5d2504b</owner>
+        <policy_name>AutoGen-scope-global-global.glide_usage_analytics_token_signing</policy_name>
+        <result>allow</result>
+        <script_hash/>
+        <script_table/>
+        <signature_data/>
+        <specify_purpose>false</specify_purpose>
+        <sys_class_name>sys_kmf_crypto_caller_policy</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-07-11 08:43:56</sys_created_on>
+        <sys_id>f7b5028e7f530210cf428c711d866595</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="User Experience Analytics" source="com.glide.appsee">69019bbcd00322105590fd9a5a77e72d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_kmf_crypto_caller_policy_f7b5028e7f530210cf428c711d866595</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:32</sys_updated_on>
+        <target_role/>
+        <target_scope display_value="Global">global</target_scope>
+        <target_script/>
+        <type>7</type>
+        <used>false</used>
+    </sys_kmf_crypto_caller_policy>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadca5ca0000001</claim_timestamp>
+        <metadata_update_name>sys_kmf_crypto_caller_policy_f7b5028e7f530210cf428c711d866595</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:32</sys_created_on>
+        <sys_id>8c4fbb2e47ecb2105dc6f19f016d4331</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:32</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadca5c90000001</claim_timestamp>
+        <metadata_update_name>sys_kmf_crypto_caller_policy_f7b5028e7f530210cf428c711d866595</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.appsee</previous_claim_name>
+        <previous_claim_scope>com.glide.appsee</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:32</sys_created_on>
+        <sys_id>444fbb2e47ecb2105dc6f19f016d4332</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:32</sys_updated_on>
+    </sys_claim>
+</record_update>

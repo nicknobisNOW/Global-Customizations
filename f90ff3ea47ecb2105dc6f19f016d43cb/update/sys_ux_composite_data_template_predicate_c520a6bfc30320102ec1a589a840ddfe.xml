@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ux_composite_data_template_predicate">
+    <sys_ux_composite_data_template_predicate action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition/>
+        <custom_condition/>
+        <custom_field_list>ai_search_teaser_title,ai_search_teaser_text,navigation_url,document_index,child_docs</custom_field_list>
+        <field_list/>
+        <name>Taxonomy - Default Search Results</name>
+        <order>1000</order>
+        <predicate_bundle display_value="Taxonomy Portal Search Bundle">d3120673c30320102ec1a589a840dd57</predicate_bundle>
+        <required_roles/>
+        <sys_class_name>sys_ux_composite_data_template_predicate</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-03-29 09:46:01</sys_created_on>
+        <sys_id>c520a6bfc30320102ec1a589a840ddfe</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Taxonomy - Default Search Results</sys_name>
+        <sys_package display_value="Content Taxonomy" source="com.snc.taxonomy">48591ffcd00722105590fd9a5a77e7b1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_ux_composite_data_template_predicate_c520a6bfc30320102ec1a589a840ddfe</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:26</sys_updated_on>
+        <table>global</table>
+        <ux_template display_value="Default Search Template">2bfb2f5553a71010968addeeff7b1231</ux_template>
+    </sys_ux_composite_data_template_predicate>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc8df00000001</claim_timestamp>
+        <metadata_update_name>sys_ux_composite_data_template_predicate_c520a6bfc30320102ec1a589a840ddfe</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:26</sys_created_on>
+        <sys_id>2e3ff72e47ecb2105dc6f19f016d43e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:26</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc8def0000001</claim_timestamp>
+        <metadata_update_name>sys_ux_composite_data_template_predicate_c520a6bfc30320102ec1a589a840ddfe</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.taxonomy</previous_claim_name>
+        <previous_claim_scope>com.snc.taxonomy</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:26</sys_created_on>
+        <sys_id>e23ff72e47ecb2105dc6f19f016d43e7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:26</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_ui_hp_publisher</collection>
+        <condition/>
+        <description/>
+        <execute_function>true</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Check related records on update</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[function onBefore(current, previous) {
+	if(current.type == 2) {
+		if (current.reference_table != previous.reference_table) {
+			_validateFieldType(current);
+		}
+	} else if (current.type == 4) {
+		var childPublisher = new GlideRecord("sys_ui_hp_group");
+		childPublisher.addQuery("child_publisher", current.sys_id);
+		childPublisher.query();
+		if(childPublisher.next()) {
+			current.type.setError(gs.getMessage("Publisher is part of an existing group"));
+			current.setAbortAction(true);
+		}
+	}
+}
+
+function _validateFieldType(current) {
+	var reference = new GlideRecord("sys_ui_hp_reference");
+	reference.addQuery("publisher_reference", current.sys_id);
+	reference.query();
+	
+	if(reference.next()) {
+		var reference_table = reference.getValue("reference_table");
+		var reference_field = reference.getValue("reference_field");
+		
+		var gr = new GlideRecord(reference_table);
+		var element = gr.getElement(reference_field);
+		var ed = element.getED();
+		if(current.reference_table != ed.getReference()) {
+			gs.addErrorMessage(gs.getMessage('Configured publisher references are of different type "{0}"', ed.getReference()));
+			current.setAbortAction(true);
+		}
+	}
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2015-06-30 12:34:02</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>02ae591093010200c5fa372e457ffbf7</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>Check related records on update</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Interactive Filters" source="com.glideapp.home.publishers">4ab5d3f8d0c322105590fd9a5a77e7d0</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_02ae591093010200c5fa372e457ffbf7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:00</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=02ae591093010200c5fa372e457ffbf7"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc27510000002</claim_timestamp>
+        <metadata_update_name>sys_script_02ae591093010200c5fa372e457ffbf7</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:00</sys_created_on>
+        <sys_id>4c2fbfea47ecb2105dc6f19f016d4307</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:00</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc27510000001</claim_timestamp>
+        <metadata_update_name>sys_script_02ae591093010200c5fa372e457ffbf7</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glideapp.home.publishers</previous_claim_name>
+        <previous_claim_scope>com.glideapp.home.publishers</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:00</sys_created_on>
+        <sys_id>042fbfea47ecb2105dc6f19f016d4308</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:00</sys_updated_on>
+    </sys_claim>
+</record_update>

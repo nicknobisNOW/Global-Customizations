@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-05-28 22:56:35</sys_created_on>
+        <sys_id>1f3f8eadfff166100158ffffffffff55</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>sys_gen_ai_provider.</sys_name>
+        <sys_package display_value="Glide OneExtend" source="com.glide.one_extend">4db05ff8d00322105590fd9a5a77e782</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_security_acl display_value="sys_gen_ai_provider">573f8eadfff166100158ffffffffff52</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_1f3f8eadfff166100158ffffffffff55</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:02</sys_updated_on>
+        <sys_user_role display_value="">173f8eadfff166100158ffffffffff20</sys_user_role>
+    </sys_security_acl_role>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc2e2a0000001</claim_timestamp>
+        <metadata_update_name>sys_security_acl_role_1f3f8eadfff166100158ffffffffff55</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:02</sys_created_on>
+        <sys_id>282fbfea47ecb2105dc6f19f016d43ce</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:02</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc2e290000001</claim_timestamp>
+        <metadata_update_name>sys_security_acl_role_1f3f8eadfff166100158ffffffffff55</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.one_extend</previous_claim_name>
+        <previous_claim_scope>com.glide.one_extend</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:02</sys_created_on>
+        <sys_id>ec2fbfea47ecb2105dc6f19f016d43ce</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:02</sys_updated_on>
+    </sys_claim>
+</record_update>

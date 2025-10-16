@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_dictionary</collection>
+        <condition>current.reference_qual.changes()</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Sync Reference Qual</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[updateRefQual();
+cleanSimple();
+cleanDynamic();
+
+function updateRefQual(){
+	if (current.reference_qual.trim().indexOf("javascript:") != 0) {   
+		current.reference_qual_condition = current.reference_qual.trim();
+		current.use_reference_qualifier = 'simple';
+		return;
+	} 
+	
+	var currentReferenceQual = current.reference_qual.trim();
+	currentReferenceQual = currentReferenceQual.substring("javascript:".length);
+	if (currentReferenceQual == "")
+		return;
+		
+	if (currentReferenceQual.endsWith(";"))
+		currentReferenceQual = currentReferenceQual.substring(0, currentReferenceQual.length - 1);
+		
+	var dyn = new GlideRecord("sys_filter_option_dynamic");
+	dyn.addQuery("script", currentReferenceQual).addOrCondition("script", currentReferenceQual + ";");	
+	dyn.query();
+	if (dyn.next()) {
+		gs.print("Dynamic: " + currentReferenceQual);
+		current.use_reference_qualifier = 'dynamic';
+		current.dynamic_ref_qual = dyn.sys_id;
+		
+	} else
+		current.use_reference_qualifier = 'advanced';
+}
+
+function cleanSimple() {
+	var curUseRef = current.use_reference_qualifier;
+	if (curUseRef == 'dynamic') 
+		current.reference_qual_condition = "";
+	 else if (curUseRef == 'advanced')
+		current.reference_qual_condition = "";
+}
+
+function cleanDynamic() {
+	var curUseRef = current.use_reference_qualifier;
+	if (curUseRef == 'simple') 
+		current.dynamic_ref_qual = "";
+	 else if (curUseRef == 'advanced') 
+		current.dynamic_ref_qual = "";
+}
+	]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>maint</sys_created_by>
+        <sys_created_on>2014-04-02 23:19:14</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>0bb57d5e4733110005c7d8966c9a71fc</sys_id>
+        <sys_mod_count>69</sys_mod_count>
+        <sys_name>Sync Reference Qual</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Dynamic Operands for Dictionary" source="com.glide.dynamic_operands.dict">58501ff4d00322105590fd9a5a77e726</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_0bb57d5e4733110005c7d8966c9a71fc</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:26</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0bb57d5e4733110005c7d8966c9a71fc"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc8bbf0000002</claim_timestamp>
+        <metadata_update_name>sys_script_0bb57d5e4733110005c7d8966c9a71fc</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:26</sys_created_on>
+        <sys_id>9e3ff72e47ecb2105dc6f19f016d43b5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:26</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc8bbf0000001</claim_timestamp>
+        <metadata_update_name>sys_script_0bb57d5e4733110005c7d8966c9a71fc</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.dynamic_operands.dict</previous_claim_name>
+        <previous_claim_scope>com.glide.dynamic_operands.dict</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:26</sys_created_on>
+        <sys_id>563ff72e47ecb2105dc6f19f016d43b6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:26</sys_updated_on>
+    </sys_claim>
+</record_update>

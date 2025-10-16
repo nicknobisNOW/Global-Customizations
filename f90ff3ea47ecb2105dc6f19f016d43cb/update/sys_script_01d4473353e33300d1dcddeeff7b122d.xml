@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>ml_capability_definition_base</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Check scope in solution name</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	var solutionLabel = current.getValue("solution_label");
+	var solutionName = current.getValue("solution_name");
+	var name = "ml_" + gs.getNewAppScopeCompanyPrefix() + '_'+ getScope(current) +'_' + getDomainName() +'_' + solutionLabel.toLowerCase().replace(/[^a-zA-Z0-9_]/g, '_');
+
+	while (name.indexOf("__") != -1) {
+		name = name.replace(/__/g, "_");
+	}
+
+	// Replace any trailing underscores
+	while (name != '' && name.charAt(name.length - 1) == '_') {
+		name = name.substring(0, name.length - 1);
+	}
+	
+	var source = current.getValue("request_source");
+	if (JSUtil.areEqual(source, 'api')) {
+		name = generateUniqueName(name);
+	}
+
+	if (!isSolutionDefinitionPresent(name)) {
+		if (name != solutionName)
+			current.setValue('solution_name',name);
+	} else {
+		gs.addErrorMessage("Solution name should be unique");
+		current.setAbortAction(true);
+	}
+	
+	function isSolutionDefinitionPresent(solutionName) {
+		if (!solutionName)
+			return false;
+		var gr = new GlideRecord('ml_capability_definition_base');
+		gr.addQuery('solution_name',solutionName);
+		gr.query();
+		if(gr.hasNext()){
+			return true;
+		}
+		return false;
+	}
+	
+	function getScope(current) {
+		var scope = gs.getCurrentApplicationScope();
+		try {
+			// use scope key in solution_properties json to create
+			// solution name for api created solutions 
+			var solutionProperties = current.getValue('solution_properties');
+			if (JSUtil.notNil (solutionProperties)) {
+				var solutionPropertiesJson = JSON.parse(solutionProperties);
+				if ('scope' in solutionPropertiesJson) {
+					scope = solutionPropertiesJson.scope;
+				}
+			}
+		} catch (ex) {
+			scope = gs.getCurrentApplicationScope();
+		}
+		return scope;
+	}
+	
+	function getDomainName() {
+		// The domain name prefix is by default global.
+		var domain_name = "global";
+		var domain_sys_id = current.getValue('sys_domain');
+
+		if (domain_sys_id === null ) {
+			return domain_name;
+		}
+
+		var name = current.sys_domain.name;
+		if(JSUtil.notNil(name)) {
+			domain_name = name.toLowerCase().replace(/[^a-zA-Z0-9_]/g, '_');
+		}
+
+		return domain_name;
+	}
+	
+	function generateUniqueName(name) {
+		var existingNames = getExistingSolutionNamesStartingWith(name);
+		// this while loop will execute for 100 iterations and
+		// try to generate a unique name
+		while (JSUtil.contains(existingNames, name)) {
+			var lastIndexOfSeparator = name.lastIndexOf("_");
+			var suffix = name.substring(lastIndexOfSeparator + 1);
+			var newSuffix = 1;
+			if (!isNaN(suffix)) {
+				newSuffix = parseInt(suffix) + 1;
+				name = name.substring(0, lastIndexOfSeparator);
+			}
+			name = name + '_' + newSuffix;
+		}
+		return name;
+	}
+	
+	function getExistingSolutionNamesStartingWith(name) {
+		var existingNames = [];
+		var gr = new GlideRecord('ml_capability_definition_base');
+		gr.addQuery('solution_name','STARTSWITH', name);
+		// we will try to get upto 100 names with the same prefix
+		// if we are still not able to generate unique name, we will 
+		// throw exception
+		gr.setLimit(100);
+		gr.query();
+		while (gr.next()) {
+			existingNames.push(gr.getValue('solution_name'));
+		}
+		return existingNames;
+	}
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-09-04 20:45:52</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>01d4473353e33300d1dcddeeff7b122d</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>Check scope in solution name</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Predictive Intelligence" source="com.glide.platform_ml">8bc05b3cd00322105590fd9a5a77e7df</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_01d4473353e33300d1dcddeeff7b122d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:25</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=01d4473353e33300d1dcddeeff7b122d"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc86a40000002</claim_timestamp>
+        <metadata_update_name>sys_script_01d4473353e33300d1dcddeeff7b122d</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:24</sys_created_on>
+        <sys_id>423ff72e47ecb2105dc6f19f016d4338</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:24</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc86a40000001</claim_timestamp>
+        <metadata_update_name>sys_script_01d4473353e33300d1dcddeeff7b122d</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.platform_ml</previous_claim_name>
+        <previous_claim_scope>com.glide.platform_ml</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:25</sys_created_on>
+        <sys_id>0a3ff72e47ecb2105dc6f19f016d4338</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:25</sys_updated_on>
+    </sys_claim>
+</record_update>

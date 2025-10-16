@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_search_context_config">
+    <sys_search_context_config action="INSERT_OR_UPDATE">
+        <attachment_limit/>
+        <collapse_attachment>true</collapse_attachment>
+        <enable_exact_match>true</enable_exact_match>
+        <evam_definition/>
+        <filter_genius_results_by_search_source>false</filter_genius_results_by_search_source>
+        <genius_results_limit>0</genius_results_limit>
+        <hit_highlighting>false</hit_highlighting>
+        <log_signals_server_side>false</log_signals_server_side>
+        <name>Help Panel Search Application</name>
+        <search_engine>ai_search</search_engine>
+        <search_profile display_value="Help Panel Search Profile">721bfee55b7120109779b9a23381c7e8</search_profile>
+        <search_results_limit>10</search_results_limit>
+        <show_disabled_facets>false</show_disabled_facets>
+        <show_tab_counts>true</show_tab_counts>
+        <spell_check>true</spell_check>
+        <suggestions_to_show_limit>10</suggestions_to_show_limit>
+        <sys_class_name>sys_search_context_config</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-01-19 08:40:28</sys_created_on>
+        <sys_id>9feafee55b7120109779b9a23381c768</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Help Panel Search Application</sys_name>
+        <sys_package display_value="ServiceNow Help and Guidance Backend" source="com.glide.sn_help">58f69f30d00722105590fd9a5a77e7f4</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_search_context_config_9feafee55b7120109779b9a23381c768</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:58</sys_updated_on>
+        <ts_index_group/>
+        <view/>
+    </sys_search_context_config>
+    <sys_translated_text action="delete_multiple" query="documentkey=9feafee55b7120109779b9a23381c768"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc206f0000001</claim_timestamp>
+        <metadata_update_name>sys_search_context_config_9feafee55b7120109779b9a23381c768</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:58</sys_created_on>
+        <sys_id>ab1f7fea47ecb2105dc6f19f016d434e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:58</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc206e0000001</claim_timestamp>
+        <metadata_update_name>sys_search_context_config_9feafee55b7120109779b9a23381c768</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.sn_help</previous_claim_name>
+        <previous_claim_scope>com.glide.sn_help</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:58</sys_created_on>
+        <sys_id>631f7fea47ecb2105dc6f19f016d434f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:58</sys_updated_on>
+    </sys_claim>
+</record_update>

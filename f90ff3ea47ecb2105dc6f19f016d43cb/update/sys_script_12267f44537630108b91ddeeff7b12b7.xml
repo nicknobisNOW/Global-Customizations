@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>m2m_kb_task</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="m2m_kb_task">task.sys_class_name=incident^kb_knowledge.sys_class_name=kb_template_known_error_article^EQ<item display_value="Incident" endquery="false" field="task.sys_class_name" goto="false" newquery="false" operator="=" or="false" value="incident"/>
+            <item display_value="Known Error article" endquery="false" field="kb_knowledge.sys_class_name" goto="false" newquery="false" operator="=" or="false" value="kb_template_known_error_article"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Update incident from known error</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+	var incidentGr = current.task.getRefRecord();
+	var knownErrorGr = current.kb_knowledge.getRefRecord();
+	var incidentUpdated = false;
+	if (JSUtil.nil(incidentGr.problem_id) && JSUtil.notNil(knownErrorGr.source) && knownErrorGr.source.sys_class_name == "problem") {
+		incidentGr.setValue('problem_id', knownErrorGr.source);
+		incidentGr.update();
+	}
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-09-20 10:26:37</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>12267f44537630108b91ddeeff7b12b7</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Update incident from known error</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Incident Management - Core" source="com.snc.incident_management">7ad69730d00722105590fd9a5a77e70d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_12267f44537630108b91ddeeff7b12b7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:20</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=12267f44537630108b91ddeeff7b12b7"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc76b20000002</claim_timestamp>
+        <metadata_update_name>sys_script_12267f44537630108b91ddeeff7b12b7</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:20</sys_created_on>
+        <sys_id>053f772e47ecb2105dc6f19f016d43ab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:20</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc76b20000001</claim_timestamp>
+        <metadata_update_name>sys_script_12267f44537630108b91ddeeff7b12b7</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.incident_management</previous_claim_name>
+        <previous_claim_scope>com.snc.incident_management</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:20</sys_created_on>
+        <sys_id>c53f772e47ecb2105dc6f19f016d43ab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:20</sys_updated_on>
+    </sys_claim>
+</record_update>

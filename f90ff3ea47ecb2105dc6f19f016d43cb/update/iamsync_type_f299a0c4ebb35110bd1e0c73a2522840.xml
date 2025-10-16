@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="iamsync_type">
+    <iamsync_type action="INSERT_OR_UPDATE">
+        <complete_percentage>100</complete_percentage>
+        <id_fields>user_name,email</id_fields>
+        <status>Completed</status>
+        <sys_class_name>iamsync_type</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-12-11 04:52:45</sys_created_on>
+        <sys_id>f299a0c4ebb35110bd1e0c73a2522840</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>User</sys_name>
+        <sys_package display_value="Federated ID Generation" source="com.glide.identity.globalid">48a0dfb8d00322105590fd9a5a77e7ce</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>iamsync_type_f299a0c4ebb35110bd1e0c73a2522840</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:18</sys_updated_on>
+        <table_name>sys_user</table_name>
+        <type_name>User</type_name>
+    </iamsync_type>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc6dc80000001</claim_timestamp>
+        <metadata_update_name>iamsync_type_f299a0c4ebb35110bd1e0c73a2522840</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:18</sys_created_on>
+        <sys_id>ac3f372e47ecb2105dc6f19f016d43b8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:18</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc6dc70000001</claim_timestamp>
+        <metadata_update_name>iamsync_type_f299a0c4ebb35110bd1e0c73a2522840</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.identity.globalid</previous_claim_name>
+        <previous_claim_scope>com.glide.identity.globalid</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:18</sys_created_on>
+        <sys_id>643f372e47ecb2105dc6f19f016d43b9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:18</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>true</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>report_stats</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>delete report_stats_execution on delete</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	//delete report_stats_executions rows
+	var sysId = (current.report_sys_id != null && current.report_sys_id.toString().length > 0) ? current.report_sys_id : current.widget_sys_id;
+	//DEF0416723: when both report_sys_id and widget_sys_id are empty, don't perform any deletion
+	if (sysId == null || sysId.toString().length == 0)
+		return;
+
+	var field = (current.report_sys_id != null && current.report_sys_id.toString().length > 0) ? 'report_sys_id' : 'widget_sys_id';
+	try {
+		var grStatsExecution = new GlideRecord('report_stats_executions');
+		if (grStatsExecution.isValid()){ //if table exists
+			grStatsExecution.addQuery(field,sysId);
+			grStatsExecution.query();
+			grStatsExecution.deleteMultiple();
+		}
+
+		//if it's a report delete report_executions rows
+		if (current.report_sys_id != null) {
+			var grReportExecutions = new GlideRecord('report_executions');
+			if (grReportExecutions.isValid()) { //if table exists
+				grReportExecutions.addQuery('report_sys_id',sysId);
+				grReportExecutions.query();
+				grReportExecutions.deleteMultiple();
+			}
+		}
+		gs.addInfoMessage(gs.getMessage('Statistics for {0}={1} were deleted.',[field,sysId]));
+	} catch(e){
+		gs.addErrorMessage(gs.getMessage('An error occurred when deleting statistics for {0}={1}',[field,sysId]));
+	}
+	
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-02-17 15:14:12</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>0808f00bd7211200bd4a4ebfae61035d</sys_id>
+        <sys_mod_count>19</sys_mod_count>
+        <sys_name>delete report_stats_execution on delete</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Reporting" source="com.glideapp.report">5caf8b70d00322105590fd9a5a77e7ca</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_0808f00bd7211200bd4a4ebfae61035d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:48</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0808f00bd7211200bd4a4ebfae61035d"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbf7510000001</claim_timestamp>
+        <metadata_update_name>sys_script_0808f00bd7211200bd4a4ebfae61035d</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:48</sys_created_on>
+        <sys_id>051f7bea47ecb2105dc6f19f016d4313</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:48</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbf7500000001</claim_timestamp>
+        <metadata_update_name>sys_script_0808f00bd7211200bd4a4ebfae61035d</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glideapp.report</previous_claim_name>
+        <previous_claim_scope>com.glideapp.report</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:48</sys_created_on>
+        <sys_id>c91f7bea47ecb2105dc6f19f016d4313</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:48</sys_updated_on>
+    </sys_claim>
+</record_update>

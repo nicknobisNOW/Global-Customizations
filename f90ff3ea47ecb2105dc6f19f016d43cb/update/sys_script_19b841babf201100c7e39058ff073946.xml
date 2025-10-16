@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>true</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_script_include</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Prevent delete for referenced scripts</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[// if the script is used by an active process, abort deletion.
+
+preventDeletion();
+
+function preventDeletion() {
+	// Check for password-reset extension-script category pattern:
+	if (current.script.indexOf("category: 'password_reset.extension") > 0) {
+		if (checkReferences('pwd_verification_type', ['verification_processor', 'enrollment_processor', 'is_enrolled']))
+			return;
+
+		if (checkReferences('pwd_cred_store', ['auto_gen_password_script', 'account_lookup']))
+			return;
+
+		if (checkReferences('pwd_identification_type', ['identification_processor']))
+			return;
+
+		if (checkReferences('pwd_process', ['post_processor']))
+			return;
+	}
+}
+
+function checkReferences(table, fields) {
+	// check that 'fields' is a valid array:
+	if (!(fields instanceof Array) || fields.length <= 0)
+		return false;
+
+	// Check if the current script is referenced from one of the <fields> in the <table>:
+	var gr = new GlideRecord(table);
+	var gc = gr.addQuery(fields[0], current.sys_id);
+	for (i = 1; i < fields.length; i++) {
+		gc.addOrCondition(fields[i],  current.sys_id);
+	}
+	gr.query();
+	
+	if (!gr.hasNext()) {
+		return false;
+	}
+	
+	while (gr.next()) {
+		gs.addErrorMessage(gs.getMessage("The script cannot be deleted because it is referenced by '{0}', in table {1}", [gr.getDisplayValue(), table]));
+	}
+	current.setAbortAction(true);
+	return true;
+}
+]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2013-10-24 20:33:23</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>19b841babf201100c7e39058ff073946</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>Prevent delete for referenced scripts</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Password Reset" source="com.glideapp.password_reset">98e61b30d00722105590fd9a5a77e74d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_19b841babf201100c7e39058ff073946</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:48</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=19b841babf201100c7e39058ff073946"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadce1e10000001</claim_timestamp>
+        <metadata_update_name>sys_script_19b841babf201100c7e39058ff073946</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:48</sys_created_on>
+        <sys_id>374f336e47ecb2105dc6f19f016d4384</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:48</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadce1e00000001</claim_timestamp>
+        <metadata_update_name>sys_script_19b841babf201100c7e39058ff073946</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glideapp.password_reset</previous_claim_name>
+        <previous_claim_scope>com.glideapp.password_reset</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:48</sys_created_on>
+        <sys_id>fb4f336e47ecb2105dc6f19f016d4384</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:48</sys_updated_on>
+    </sys_claim>
+</record_update>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection/>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>getGroupMembersM2M</name>
+        <order>200</order>
+        <priority/>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[// Only show members of current group when selecting the roster members
+//
+// 'lookup' is the GlideRecord that we will be using to select the users for the M2M list
+//
+
+// Get the list of users in this group
+gs.log("Getting users from group (" + current.rota.group + ")");
+var userIds = new Array();
+var userGR = new GlideRecord('sys_user_grmember');
+userGR.addQuery("group", current.rota.group);
+userGR.query();
+while (userGR.next()) {
+    userIds.push(userGR.user.toString());
+}
+
+var encoded = 'sys_idIN' + userIds.join(',');
+lookup.addEncodedQuery(encoded);
+]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>glide.maint</sys_created_by>
+        <sys_created_on>2007-04-18 09:46:47</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>041646cb0a4700d0016ac02258c25645</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>getGroupMembersM2M</sys_name>
+        <sys_overrides display_value="">global</sys_overrides>
+        <sys_package display_value="Advanced Schedules Support" source="com.glide.schedules">0973d7f8d08322105590fd9a5a77e765</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_041646cb0a4700d0016ac02258c25645</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:41</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=041646cb0a4700d0016ac02258c25645"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbde590000001</claim_timestamp>
+        <metadata_update_name>sys_script_041646cb0a4700d0016ac02258c25645</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:41</sys_created_on>
+        <sys_id>630fb7ea47ecb2105dc6f19f016d4360</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:41</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbde580000001</claim_timestamp>
+        <metadata_update_name>sys_script_041646cb0a4700d0016ac02258c25645</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.schedules</previous_claim_name>
+        <previous_claim_scope>com.glide.schedules</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:41</sys_created_on>
+        <sys_id>270fb7ea47ecb2105dc6f19f016d4360</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:41</sys_updated_on>
+    </sys_claim>
+</record_update>

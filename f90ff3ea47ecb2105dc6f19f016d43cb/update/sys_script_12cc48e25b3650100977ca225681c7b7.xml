@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>ais_search_source</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Put Preview Count and Link on Scratchpad</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+    // Datasource Filter And Search Source Filter AND (OR Class)
+    g_scratchpad.recordCount = 0;
+    if (gs.nil(current.datasource))
+        return;
+
+    var fDatasourceFilter = new sn_ais.AisUtil().getTableLevelAttribute(current.datasource.source, 'filter', '');
+    var fSearchSourceFilter = current.condition;
+    var fTables = [];
+
+    if (new GlideRecord(current.datasource).isValidField('sys_class_name'))
+        fTables.push("sys_class_name=" + current.getValue("datasource"));
+    var childTablesGr = new GlideRecord('ais_child_table');
+    childTablesGr.addQuery("datasource", current.datasource.sys_id);
+    childTablesGr.addQuery("active", "true");
+    childTablesGr.query();
+    while (childTablesGr.next())
+        fTables.push("sys_class_name=" + childTablesGr.getValue("table"));
+    var conditions = [];
+    conditions.push(fSearchSourceFilter);
+    conditions.push(fTables.join("^OR"));
+    var filteredConditions = conditions.filter(Boolean);
+    var condition = filteredConditions.join("^");
+    var allDatasourceCriteria = fDatasourceFilter.split("^NQ").filter(Boolean);
+    allDatasourceCriteria.forEach(function(criteria, idx) {
+        allDatasourceCriteria[idx] = criteria + "^" + condition;
+    });
+    condition = allDatasourceCriteria.length ? allDatasourceCriteria.join("^NQ") : condition;
+    var count = new GlideAggregate(current.datasource);
+    count.addAggregate('COUNT');
+    count.addEncodedQuery(condition, true);
+    count.query();
+    var records = 0;
+    if (count.next()) {
+        records = count.getAggregate('COUNT');
+        g_scratchpad.recordCount = records;
+    }
+    g_scratchpad.adjustedCondition = encodeURIComponent(encodeURIComponent(condition));
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-25 19:32:44</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>12cc48e25b3650100977ca225681c7b7</sys_id>
+        <sys_mod_count>18</sys_mod_count>
+        <sys_name>Put Preview Count and Link on Scratchpad</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="AI Search" source="com.glide.ais">7ac05b3cd00322105590fd9a5a77e70e</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_12cc48e25b3650100977ca225681c7b7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:25</sys_updated_on>
+        <template/>
+        <when>before_display</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=12cc48e25b3650100977ca225681c7b7"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc8a340000001</claim_timestamp>
+        <metadata_update_name>sys_script_12cc48e25b3650100977ca225681c7b7</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:25</sys_created_on>
+        <sys_id>9a3ff72e47ecb2105dc6f19f016d437e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:25</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc8a330000001</claim_timestamp>
+        <metadata_update_name>sys_script_12cc48e25b3650100977ca225681c7b7</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.ais</previous_claim_name>
+        <previous_claim_scope>com.glide.ais</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:25</sys_created_on>
+        <sys_id>5e3ff72e47ecb2105dc6f19f016d437e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:25</sys_updated_on>
+    </sys_claim>
+</record_update>

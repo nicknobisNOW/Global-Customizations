@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_properties</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="sys_properties">nameSTARTSWITHglide.outbound_http_log.override.level^EQ<item endquery="false" field="name" goto="false" newquery="false" operator="STARTSWITH" or="false" value="glide.outbound_http_log.override.level"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Warn Outbound HTTP log level change</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+    var value = current.value;
+    if (value == 'all' || value == 'elevated') {
+        gs.addInfoMessage(gs.getMessage("Use caution when enabling the All and Elevated log levels as they can capture sensitive data such as authorization headers or session cookies. Revert back to the Basic log level after troubleshooting."));
+    }
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-10-21 21:38:46</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>01893dde5317301086b8ddeeff7b1207</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Warn Outbound HTTP log level change</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Outbound HTTP Log" source="com.glide.outbound_http_log">80a79374d00722105590fd9a5a77e7d6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_01893dde5317301086b8ddeeff7b1207</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:27</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=01893dde5317301086b8ddeeff7b1207"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc92310000002</claim_timestamp>
+        <metadata_update_name>sys_script_01893dde5317301086b8ddeeff7b1207</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:27</sys_created_on>
+        <sys_id>323f3b2e47ecb2105dc6f19f016d4347</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:27</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc92310000001</claim_timestamp>
+        <metadata_update_name>sys_script_01893dde5317301086b8ddeeff7b1207</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glide.outbound_http_log</previous_claim_name>
+        <previous_claim_scope>com.glide.outbound_http_log</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:27</sys_created_on>
+        <sys_id>f23f3b2e47ecb2105dc6f19f016d4347</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:27</sys_updated_on>
+    </sys_claim>
+</record_update>

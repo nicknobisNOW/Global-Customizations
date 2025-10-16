@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>cmdb_rel_type_suggest</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Update Flip Side</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[updateFlip();
+
+function updateFlip() {
+	var flipRel = '';
+	if (previous.relationship.indexOf('parent') == 0)
+		flipRel = ('child:' + previous.cmdb_rel_type).trim();
+	else
+		flipRel = ('parent:' + previous.cmdb_rel_type).trim();
+
+	// Find the flip side relationship
+	var gr = new GlideRecord('cmdb_rel_type_suggest');
+	gr.addQuery('cmdb_rel_type', previous.cmdb_rel_type);
+	gr.addQuery('relationship', flipRel);
+	gr.addQuery('base_class', previous.dependent_class);
+	gr.addQuery('dependent_class', previous.base_class);
+	gr.addQuery('sys_id','!=',current.sys_id);
+	gr.query();
+
+	// Find the changed fields and apply it to the flip side relationship
+	findChangeAndApply(gr);
+}
+
+function findChangeAndApply(gr) {
+	var relationshipChanged = fieldChanged('relationship');
+	var baseClassChanged = fieldChanged('base_class');
+	var dependentClassChanged = fieldChanged('dependent_class');
+	while (gr.next()) {
+		var newRelationshipValue;
+		if (relationshipChanged) {
+			if (current.relationship.indexOf('parent') == 0)
+				newRelationshipValue = ('child:' + current.cmdb_rel_type).trim();
+			else
+				newRelationshipValue = ('parent:' + current.cmdb_rel_type).trim();
+			gr.setValue('relationship', newRelationshipValue);
+		}
+		if (baseClassChanged) 
+			gr.setValue('dependent_class', current.base_class);
+		if(dependentClassChanged)
+			gr.setValue('base_class', current.getValue('dependent_class'));
+		gr.skip_validation = true;
+		gr.update();
+	}
+}
+
+function fieldChanged(field) {
+	if (previous.getValue(field) != current.getValue(field))
+		return true;
+	return false;
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2015-07-13 17:50:08</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>14a8a1a0eb110200e37c4d3df106feaf</sys_id>
+        <sys_mod_count>50</sys_mod_count>
+        <sys_name>Update Flip Side</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Configuration Management (CMDB)" source="com.snc.cmdb">f6511770d04322105590fd9a5a77e736</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_14a8a1a0eb110200e37c4d3df106feaf</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:38</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=14a8a1a0eb110200e37c4d3df106feaf"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbd0fb0000001</claim_timestamp>
+        <metadata_update_name>sys_script_14a8a1a0eb110200e37c4d3df106feaf</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:38</sys_created_on>
+        <sys_id>2e0f77ea47ecb2105dc6f19f016d430e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:38</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadbd0fa0000001</claim_timestamp>
+        <metadata_update_name>sys_script_14a8a1a0eb110200e37c4d3df106feaf</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.cmdb</previous_claim_name>
+        <previous_claim_scope>com.snc.cmdb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:31:38</sys_created_on>
+        <sys_id>e20f77ea47ecb2105dc6f19f016d430f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:31:38</sys_updated_on>
+    </sys_claim>
+</record_update>

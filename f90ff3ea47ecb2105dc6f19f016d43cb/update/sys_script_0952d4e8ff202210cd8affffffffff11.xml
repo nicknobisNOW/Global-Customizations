@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>sys_user_has_role</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Web Service Access Only for MID Role</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+    // Ensure the user record exists
+    var user = new GlideRecord('sys_user');
+    if (!user.get(current.user)) {
+        return;
+    }
+
+    var midRoleSysId = getRoleSysId('mid_server');
+    var securityAdminRoleSysId = getRoleSysId('security_admin');
+
+    if (!midRoleSysId || !securityAdminRoleSysId) {
+        return; // Exit if roles are not found
+    }
+
+    var hasMidServerRole = userHasRole(user.sys_id, midRoleSysId);
+    var hasSecurityAdminRole = userHasRole(user.sys_id, securityAdminRoleSysId);
+
+    if(current.role == securityAdminRoleSysId || hasSecurityAdminRole) {
+      return;
+    }
+
+    if (!user.web_service_access_only && (hasMidServerRole || current.role == midRoleSysId)) {
+        gs.addInfoMessage(gs.getMessage("Web Service Access Only for MID Server Role"));
+    }
+})(current, previous);
+
+// Function to get the sys_id of a role
+function getRoleSysId(roleName) {
+    var roleGr = new GlideRecord('sys_user_role');
+    roleGr.addQuery('name', roleName);
+    roleGr.query();
+    return roleGr.next() ? roleGr.getValue('sys_id') : null;
+}
+
+// Function to check if a user has a specific role
+function userHasRole(userSysId, roleSysId) {
+    var gr = new GlideRecord('sys_user_has_role');
+    gr.addQuery('user', userSysId);
+    gr.addQuery('role', roleSysId);
+    gr.query();
+    return gr.hasNext(); // Returns true if the user has the role
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>now.midserver</sys_created_by>
+        <sys_created_on>2025-03-24 08:06:06</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>0952d4e8ff202210cd8affffffffff11</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Web Service Access Only for MID Role</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="MID Server" source="com.glideapp.agent">aaa45334d0c322105590fd9a5a77e7f8</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_0952d4e8ff202210cd8affffffffff11</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:02</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0952d4e8ff202210cd8affffffffff11"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc2f360000002</claim_timestamp>
+        <metadata_update_name>sys_script_0952d4e8ff202210cd8affffffffff11</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:02</sys_created_on>
+        <sys_id>a42fbfea47ecb2105dc6f19f016d43e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:02</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc2f360000001</claim_timestamp>
+        <metadata_update_name>sys_script_0952d4e8ff202210cd8affffffffff11</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.glideapp.agent</previous_claim_name>
+        <previous_claim_scope>com.glideapp.agent</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:02</sys_created_on>
+        <sys_id>6c2fbfea47ecb2105dc6f19f016d43e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:02</sys_updated_on>
+    </sys_claim>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>0952d4e8ff202210cd8affffffffff11</id>
+        <sys_created_by>now.midserver</sys_created_by>
+        <sys_created_on>2025-03-24 08:06:06</sys_created_on>
+        <sys_id>6514dc6cff202210cd8afffffffffff7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>now.midserver</sys_updated_by>
+        <sys_updated_on>2025-03-24 08:06:06</sys_updated_on>
+        <table>sys_script</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>

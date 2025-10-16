@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>on_call_template_contact_attempt</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message><![CDATA[<p>Contact attempt cannot be less than 1</p>]]></message>
+        <name>Validate contact attempt value</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+    if (current.contact_attempt < 1) {
+        gs.addErrorMessage(gs.getMessage("Contact attempt cannot be less than 1"));
+        current.setAbortAction(true);
+        return;
+    }
+    var attemptAggregateGr = new GlideAggregate("on_call_template_contact_attempt");
+    attemptAggregateGr.addQuery("preference_template", current.preference_template);
+    attemptAggregateGr.addQuery("contact_attempt", current.contact_attempt);
+    attemptAggregateGr.addQuery('sys_id', '!=', current.getUniqueValue());
+    attemptAggregateGr.setLimit(1);
+    attemptAggregateGr.query();
+    if (attemptAggregateGr.hasNext()) {
+        gs.addErrorMessage(gs.getMessage("Contact attempt with value {0} already exists.", current.contact_attempt));
+        current.setAbortAction(true);
+    }
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-03-27 05:30:35</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>0baa6642c3716110b1f444ecc840dd35</sys_id>
+        <sys_mod_count>17</sys_mod_count>
+        <sys_name>Validate contact attempt value</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="On-Call Scheduling" source="com.snc.on_call_rotation">af089ff4d00722105590fd9a5a77e7c0</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_0baa6642c3716110b1f444ecc840dd35</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:48</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=0baa6642c3716110b1f444ecc840dd35"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadce2e50000002</claim_timestamp>
+        <metadata_update_name>sys_script_0baa6642c3716110b1f444ecc840dd35</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:48</sys_created_on>
+        <sys_id>f74f336e47ecb2105dc6f19f016d439b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:48</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadce2e50000001</claim_timestamp>
+        <metadata_update_name>sys_script_0baa6642c3716110b1f444ecc840dd35</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.on_call_rotation</previous_claim_name>
+        <previous_claim_scope>com.snc.on_call_rotation</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:48</sys_created_on>
+        <sys_id>bf4f336e47ecb2105dc6f19f016d439b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:48</sys_updated_on>
+    </sys_claim>
+</record_update>

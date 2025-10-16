@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>asmt_nps_result</collection>
+        <condition>GlidePluginManager.isActive('com.glide.domain')</condition>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Set Domain of NPS Result</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	// nps result domain = assessable record domain
+	//if assessable record's record is not domain separated, nps result domain = metric domain (if is global)
+	var sourceRecord = new GlideRecord(current.source_table);
+	sourceRecord.get(current.source_id);
+	
+	if (tableHasColumn(current.source_table))
+		current.sys_domain = sourceRecord.sys_domain;
+	else if (isGlobal(current.nps_metric.sys_domain))
+		current.sys_domain = current.nps_metric.sys_domain;
+	function tableHasColumn(tableName) {
+		var gr = new GlideRecord(tableName);
+		gr.initialize();
+		var ge = gr.getElement("sys_domain");
+		return ge != null;
+	}
+	function isGlobal(domain) {
+	if (domain.nil())
+		return true;
+	if (domain.indexOf("global") >= 0)
+		return true;
+	return false;
+}
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-10-27 07:46:05</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>012571c40f673010176e008c07767e1d</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Set Domain of NPS Result</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Assessment" source="com.snc.assessment_core">3ba3d37cd08322105590fd9a5a77e736</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_012571c40f673010176e008c07767e1d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:41</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=012571c40f673010176e008c07767e1d"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcc58b0000002</claim_timestamp>
+        <metadata_update_name>sys_script_012571c40f673010176e008c07767e1d</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:41</sys_created_on>
+        <sys_id>f94f7f2e47ecb2105dc6f19f016d431b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:41</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadcc58b0000001</claim_timestamp>
+        <metadata_update_name>sys_script_012571c40f673010176e008c07767e1d</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.assessment_core</previous_claim_name>
+        <previous_claim_scope>com.snc.assessment_core</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:41</sys_created_on>
+        <sys_id>824f7f2e47ecb2105dc6f19f016d431c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:41</sys_updated_on>
+    </sys_claim>
+</record_update>

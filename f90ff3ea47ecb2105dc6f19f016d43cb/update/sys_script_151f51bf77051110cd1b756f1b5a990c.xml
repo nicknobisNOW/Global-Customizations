@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>true</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>unconnected_category_content</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Display last refresh date</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+    var index = gs.action.getGlideURI().toString().indexOf('unconnected_category_content_list'); // to display only on UI List
+	var lastRunDate = gs.getProperty("taxonomy.category.new_content_job_last_run");
+    if (index != -1 && lastRunDate) {
+        gs.flushMessages();
+        var msg = gs.getMessage('This list was last updated on {0}', lastRunDate);
+        gs.addInfoMessage(msg);
+    }
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-08-08 07:31:25</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>151f51bf77051110cd1b756f1b5a990c</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>Display last refresh date</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Content Taxonomy" source="com.snc.taxonomy">48591ffcd00722105590fd9a5a77e7b1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_151f51bf77051110cd1b756f1b5a990c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:32</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=151f51bf77051110cd1b756f1b5a990c"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadca3f90000001</claim_timestamp>
+        <metadata_update_name>sys_script_151f51bf77051110cd1b756f1b5a990c</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:32</sys_created_on>
+        <sys_id>333f7b2e47ecb2105dc6f19f016d43fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:32</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadca3f80000001</claim_timestamp>
+        <metadata_update_name>sys_script_151f51bf77051110cd1b756f1b5a990c</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.taxonomy</previous_claim_name>
+        <previous_claim_scope>com.snc.taxonomy</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:32</sys_created_on>
+        <sys_id>f33f7b2e47ecb2105dc6f19f016d43fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:32</sys_updated_on>
+    </sys_claim>
+</record_update>

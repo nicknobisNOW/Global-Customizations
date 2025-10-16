@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>alm_transfer_order_line_task</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="alm_transfer_order_line_task">state=3^ORstate=7^EQ<item display_value="Closed Complete" endquery="false" field="state" goto="false" newquery="false" operator="=" or="false" value="3"/>
+            <item display_value="Closed Skipped" endquery="false" field="state" goto="false" newquery="false" operator="=" or="true" value="7"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Close skip previous tasks</name>
+        <order>200</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[/** All tasks for the in-flight TOLs are created at once and these tasks should be closed in the order mentioned. 
+	When a task with higher order than some other tasks is closed, This business rule will close skip the tasks whose order is less than the current closing task.
+	This business rule will only run when there are more than 2 open/pending/work in progress tasks for the TOL. This ensures that the business rule will run only for in-flight TOLs as for any new TOL that is created, will have a workflow associated with it and thus creating one task at a time.
+**/
+
+closeSkipPreviousTasks();
+
+function closeSkipPreviousTasks() {
+    var taskCount = getOpenTaskCount();
+    var firstOpenTaskGr = getFirstOpenTask();
+
+    if (!gs.nil(firstOpenTaskGr)) {
+        if (taskCount >= 2 && firstOpenTaskGr.getValue('order') < current.getValue('order')) {
+            // Close skip the tasks whose order is less than the current
+            closeBeforeTasks();
+        }
+    }
+
+    function closeBeforeTasks() {
+        var tolTaskGr = new GlideRecord('alm_transfer_order_line_task');
+        tolTaskGr.addQuery('transfer_order_line', current.transfer_order_line);
+        // state = 1 = Open, state = 2 = Work In Progress, state = -5 = Pending
+        tolTaskGr.addQuery('state', 'IN', '-5,1,2');
+        tolTaskGr.addQuery('order', '<', parseInt(current.order));
+		tolTaskGr.orderBy('order');
+        tolTaskGr.query();
+        while (tolTaskGr.next()) {
+            tolTaskGr.setValue('state', 7);
+            tolTaskGr.update();
+        }
+		
+    }
+
+    function getFirstOpenTask() {
+        var tolTaskGr = new GlideRecord('alm_transfer_order_line_task');
+        tolTaskGr.addQuery('transfer_order_line', current.transfer_order_line);
+        // state = 1 = Open, state = 2 = Work In Progress, state = -5 = Pending
+        tolTaskGr.addQuery('state', 'IN', '-5,1,2');
+        tolTaskGr.orderBy('order');
+        tolTaskGr.setLimit(1);
+        tolTaskGr.query();
+        if (tolTaskGr.next()) {
+            return tolTaskGr;
+        }
+        return null;
+    }
+
+    function getOpenTaskCount() {
+        taskCount = 0;
+        var taskGr = new GlideAggregate('alm_transfer_order_line_task');
+        taskGr.addQuery('transfer_order_line', current.transfer_order_line);
+        // state = 1 = Open, state = 2 = Work In Progress, state = -5 = Pending
+        taskGr.addQuery('state', 'IN', '-5,1,2');
+        taskGr.addAggregate('COUNT', 'order');
+        taskGr.orderByAggregate('COUNT', 'order');
+        taskGr.setGroup(false);
+        taskGr.query();
+        if (taskGr.next()) {
+            taskCount = parseInt(taskGr.getAggregate('COUNT', 'order'));
+        }
+        return taskCount;
+    }
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-03-30 00:57:50</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path/>
+        <sys_id>034e053014ac3300964f04747c5954f2</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>Close skip previous tasks</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Asset Management" source="com.snc.asset_management">4573d7f8d08322105590fd9a5a77e748</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</sys_scope>
+        <sys_update_name>sys_script_034e053014ac3300964f04747c5954f2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:00</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=034e053014ac3300964f04747c5954f2"/>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc27a00000001</claim_timestamp>
+        <metadata_update_name>sys_script_034e053014ac3300964f04747c5954f2</metadata_update_name>
+        <previous_claim_app_version>1.0.0</previous_claim_app_version>
+        <previous_claim_name>Global Customizations - Upgrade Plan</previous_claim_name>
+        <previous_claim_scope>f90ff3ea47ecb2105dc6f19f016d43cb</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:00</sys_created_on>
+        <sys_id>4c2fbfea47ecb2105dc6f19f016d430d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:00</sys_updated_on>
+    </sys_claim>
+    <sys_claim action="INSERT_OR_UPDATE">
+        <claim_owner_scope display_value="Global Customizations - Upgrade Plan">f90ff3ea47ecb2105dc6f19f016d43cb</claim_owner_scope>
+        <claim_timestamp>199eadc279f0000001</claim_timestamp>
+        <metadata_update_name>sys_script_034e053014ac3300964f04747c5954f2</metadata_update_name>
+        <previous_claim_app_version/>
+        <previous_claim_name>com.snc.asset_management</previous_claim_name>
+        <previous_claim_scope>com.snc.asset_management</previous_claim_scope>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-16 02:32:00</sys_created_on>
+        <sys_id>042fbfea47ecb2105dc6f19f016d430e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-16 02:32:00</sys_updated_on>
+    </sys_claim>
+</record_update>
